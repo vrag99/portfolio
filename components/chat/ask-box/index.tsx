@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import { AnimatePresence, motion } from "motion/react";
 import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
 
@@ -37,7 +36,7 @@ const AskBox = () => {
     } else {
       setIsMenuOpen(false);
     }
-  }, [inputValue]);
+  }, [inputValue, hasSelectedCommand]);
 
   const handleCommandSelect = (command: Command) => {
     setIsMenuOpen(false);
@@ -71,7 +70,7 @@ const AskBox = () => {
         commands={COMMANDS}
         search={inputValue}
         selectCommand={handleCommandSelect}
-        position="bottom"
+        position="top"
       />
     </div>
   );

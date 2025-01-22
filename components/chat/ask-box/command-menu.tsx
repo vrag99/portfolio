@@ -18,7 +18,6 @@ interface CommandMenuProps {
 
 const CommandMenu = ({
   isOpen,
-  setIsOpen,
   commands,
   search,
   selectCommand,
@@ -29,7 +28,7 @@ const CommandMenu = ({
     setFilteredCommands(
       commands.filter((command) => command.name.includes(search))
     );
-  }, [search]);
+  }, [search, commands]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const handleKeyDown = useCallback(
@@ -62,6 +61,7 @@ const CommandMenu = ({
     },
     [selectedIndex, filteredCommands]
   );
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("keydown", handleKeyDown);

@@ -1,6 +1,6 @@
-import { AskBox, Hero } from "@/components/home";
+import { AskBox } from "@/components/chat";
+import { Hero } from "@/components/home";
 import BlurFade from "@/components/ui/blur-fade";
-import { TextEffect } from "@/components/ui/text-effect";
 
 export default function Home() {
   return (
