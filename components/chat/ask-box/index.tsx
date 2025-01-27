@@ -44,8 +44,12 @@ const AskBox = () => {
     setInputValue(command.name);
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  }
+
   return (
-    <div className="relative flex flex-col">
+    <form onSubmit={handleSubmit} className="relative flex flex-col">
       <Input
         type="text"
         value={inputValue}
@@ -72,7 +76,7 @@ const AskBox = () => {
         selectCommand={handleCommandSelect}
         position="top"
       />
-    </div>
+    </form>
   );
 };
 
