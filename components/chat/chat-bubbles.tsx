@@ -1,9 +1,9 @@
-import { Sparkle, Terminal } from "lucide-react";
+import { Terminal } from "lucide-react";
 import React from "react";
 
 export const UserBubble = ({ message }: { message: string }) => {
   return (
-    <p className="px-4 py-1.5 self-end rounded-xl bg-accent text-accent-foreground font-medium">
+    <p className="px-4 py-1.5 self-end rounded-xl bg-accent text-accent-foreground font-medium w-fit">
       {message}
     </p>
   );
@@ -11,12 +11,12 @@ export const UserBubble = ({ message }: { message: string }) => {
 
 export const AiBubble = () => {
   return (
-    <div className="self-start p-2 flex flex-row gap-2 bg-secondary/10 rounded-2xl border-b-2 border-r">
+    <div className="self-start p-2 flex flex-row gap-2 bg-secondary/10 rounded-2xl border-b-2 border-r mb-4">
       <div className="w-8 h-8 mt-1">
         <Terminal className="h-4 w-4" />
       </div>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab nemo ipsum
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab nemo ipsum 
         omnis! Accusamus sunt optio dolorum odit ea sit aliquid, voluptate non
         perferendis fugit culpa inventore unde esse voluptatibus nihil.
       </p>

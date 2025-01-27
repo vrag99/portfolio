@@ -9,7 +9,18 @@ interface ChatStoreStates {
 }
 
 export const useChatStore = create<ChatStoreStates>((set) => ({
-  thread: [],
+  thread: [{
+    sender: "user",
+    data: "/about",
+  }, {
+    sender: "ai",
+    data: {
+      isLoading: false,
+      response: [
+        "Hi, I a"
+      ],
+    },
+  }],
   addBubble: (bubble) =>
     set((state) => ({ thread: [...state.thread, bubble] })),
   addAiLoadingBubble: () =>

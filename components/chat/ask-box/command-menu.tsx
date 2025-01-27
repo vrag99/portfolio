@@ -59,7 +59,7 @@ const CommandMenu = ({
           break;
       }
     },
-    [selectedIndex, filteredCommands]
+    [selectedIndex, filteredCommands, position, selectCommand]
   );
 
   useEffect(() => {

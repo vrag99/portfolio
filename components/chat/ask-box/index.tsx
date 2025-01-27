@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
+import { useChatStore } from "@/lib/store/chat-store";
 
 const COMMANDS: Command[] = [
   {
@@ -27,8 +28,11 @@ const COMMANDS: Command[] = [
 
 const AskBox = () => {
   const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
+
+  const { addBubble, addAiLoadingBubble } = useChatStore();
 
   useEffect(() => {
     if (inputValue.startsWith("/") && !hasSelectedCommand) {
@@ -46,13 +50,23 @@ const AskBox = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  }
+    if (inputValue === "") return;
+    if (hasSelectedCommand) {
+      addBubble({
+        sender: "user",
+        data: inputValue,
+      });
+      addAiLoadingBubble();
+      setInputValue("");
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="relative flex flex-col">
       <Input
         type="text"
         value={inputValue}
+        ref={inputRef}
         className={cn(
           "h-14",
           "px-5 py-4",
