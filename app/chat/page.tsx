@@ -5,8 +5,10 @@ import React from "react";
 const ChatPage = () => {
   return (
     <>
-      <Thread />
-      <div className="sticky bottom-0 py-4 bg-background">
+      <div className="space-y-8 px-4 flex-1">
+        <Thread />
+      </div>
+      <div className="sticky bottom-0 pb-4 bg-background">
         <AskBox />
       </div>
     </>
