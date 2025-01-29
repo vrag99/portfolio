@@ -43,21 +43,22 @@ const AskBox = () => {
   }, [inputValue, hasSelectedCommand]);
 
   const handleCommandSelect = (command: Command) => {
+    setInputValue(command.name);
     setIsMenuOpen(false);
     setHasSelectedCommand(true);
-    setInputValue(command.name);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputValue === "") return;
-    if (hasSelectedCommand) {
+    if (hasSelectedCommand || inputValue) {
       addBubble({
         sender: "user",
         data: inputValue,
       });
       addAiLoadingBubble();
       setInputValue("");
+      setHasSelectedCommand(false);
     }
   };
 

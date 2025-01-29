@@ -6,28 +6,24 @@ import { useChatStore } from "@/lib/store/chat-store";
 
 const Thread = () => {
   const { thread } = useChatStore();
-  const threadRef = useRef<HTMLDivElement | null>(null);
+  const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (threadRef.current) {
-      threadRef.current.addEventListener("DOMNodeInserted", (e) => {
-        const target = e.target as HTMLElement;
-        target.scrollIntoView({ behavior: "smooth" });
-      });
-    }
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [thread]);
 
   return (
-    <div ref={threadRef} className="gap-4 px-4 flex-1 flex flex-col">
+    <div className="gap-4 px-4 flex-1 flex flex-col">
       {thread.map((bubble, i) => (
-        <>
+        <div className="flex flex-col" key={i}>
           {bubble.sender === "user" ? (
-            <UserBubble message={bubble.data} key={i} />
+            <UserBubble message={bubble.data} />
           ) : (
-            <AiBubble key={i} />
+            <AiBubble />
           )}
-        </>
+        </div>
       ))}
+      <div ref={endRef} />
     </div>
   );
 };

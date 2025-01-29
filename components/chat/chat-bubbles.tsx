@@ -11,7 +11,7 @@ export const UserBubble = ({ message }: { message: string }) => {
 
 export const AiBubble = () => {
   return (
-    <div className="self-start p-2 flex flex-row gap-2 bg-secondary/10 rounded-2xl border-b-2 border-r mb-4">
+    <div className="self-start p-2 flex flex-row gap-2 bg-secondary/10 rounded-2xl border-b-2 border-r">
       <div className="w-8 h-8 mt-1">
         <Terminal className="h-4 w-4" />
       </div>
