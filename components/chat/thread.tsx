@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { UserBubble, AiBubble } from "./chat-bubbles";
 import { useChatStore } from "@/lib/store/chat-store";
+import { AnimatePresence, motion } from "motion/react";
 
 const Thread = () => {
   const { thread } = useChatStore();
@@ -14,18 +15,46 @@ const Thread = () => {
 
   return (
     <div className="gap-4 px-4 flex-1 flex flex-col">
-      {thread.map((bubble, i) => (
-        <div className="flex flex-col" key={i}>
-          {bubble.sender === "user" ? (
-            <UserBubble message={bubble.data} />
-          ) : (
-            <AiBubble />
-          )}
-        </div>
-      ))}
+      <AnimatePresence>
+        {thread.map((bubble, i) => (
+          <PushAnimationWrapper className="flex flex-col" key={i}>
+            {bubble.sender === "user" ? (
+              <UserBubble message={bubble.data} />
+            ) : (
+              <AiBubble />
+            )}
+          </PushAnimationWrapper>
+        ))}
+      </AnimatePresence>
       <div ref={endRef} />
     </div>
   );
 };
+
+function PushAnimationWrapper({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      layout
+      className={className}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        opacity: { duration: 0.1 },
+        layout: {
+          type: "spring",
+          bounce: 0.3,
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default Thread;

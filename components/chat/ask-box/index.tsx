@@ -26,8 +26,12 @@ const COMMANDS: Command[] = [
   },
 ];
 
-const AskBox = () => {
-  const [inputValue, setInputValue] = useState("");
+const AskBox = ({
+  commandBoxPosition = "top",
+}: {
+  commandBoxPosition?: "top" | "bottom";
+}) => {
+  const { userInput: inputValue, setUserInput: setInputValue } = useChatStore();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
@@ -89,7 +93,7 @@ const AskBox = () => {
         commands={COMMANDS}
         search={inputValue}
         selectCommand={handleCommandSelect}
-        position="top"
+        position={commandBoxPosition}
       />
     </form>
   );
