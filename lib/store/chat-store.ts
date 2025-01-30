@@ -20,7 +20,7 @@ export const useChatStore = create<ChatStoreStates>((set) => ({
     {
       sender: "ai",
       data: {
-        isLoading: false,
+        isLoading: true,
         response: ["Hi, I a"],
       },
     },

@@ -21,7 +21,7 @@ const Thread = () => {
             {bubble.sender === "user" ? (
               <UserBubble message={bubble.data} />
             ) : (
-              <AiBubble />
+              <AiBubble {...bubble.data} />
             )}
           </PushAnimationWrapper>
         ))}
@@ -45,11 +45,7 @@ function PushAnimationWrapper({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
-        opacity: { duration: 0.1 },
-        layout: {
-          type: "spring",
-          bounce: 0.3,
-        },
+        opacity: { duration: 0.3 },
       }}
     >
       {children}
