@@ -31,7 +31,8 @@ const AskBox = ({
 }: {
   commandBoxPosition?: "top" | "bottom";
 }) => {
-  const { userInput: inputValue, setUserInput: setInputValue } = useChatStore();
+  const { userInput, setUserInput } = useChatStore();
+  const [inputValue, setInputValue] = useState(userInput);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
@@ -55,6 +56,7 @@ const AskBox = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputValue === "") return;
+    setUserInput(inputValue)
     if (hasSelectedCommand || inputValue) {
       addBubble({
         sender: "user",

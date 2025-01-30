@@ -6,11 +6,17 @@ import { useChatStore } from "@/lib/store/chat-store";
 import { AnimatePresence, motion } from "motion/react";
 
 const Thread = () => {
-  const { thread } = useChatStore();
+  const { thread, showAiResponse } = useChatStore();
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [thread]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      showAiResponse(["Hello there!"]);
+    }, 5000);
   }, [thread]);
 
   return (
@@ -19,9 +25,9 @@ const Thread = () => {
         {thread.map((bubble, i) => (
           <PushAnimationWrapper className="flex flex-col" key={i}>
             {bubble.sender === "user" ? (
-              <UserBubble message={bubble.data} />
+              <UserBubble text={bubble.data} />
             ) : (
-              <AiBubble {...bubble.data} />
+              <AiBubble data={bubble.data} />
             )}
           </PushAnimationWrapper>
         ))}

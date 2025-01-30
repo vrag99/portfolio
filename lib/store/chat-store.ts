@@ -12,19 +12,7 @@ interface ChatStoreStates {
 
 export const useChatStore = create<ChatStoreStates>((set) => ({
   userInput: "",
-  thread: [
-    {
-      sender: "user",
-      data: "/about",
-    },
-    {
-      sender: "ai",
-      data: {
-        isLoading: true,
-        response: ["Hi, I a"],
-      },
-    },
-  ],
+  thread: [],
   setUserInput: (input) => set({ userInput: input }),
   addBubble: (bubble) =>
     set((state) => ({ thread: [...state.thread, bubble] })),
@@ -35,11 +23,17 @@ export const useChatStore = create<ChatStoreStates>((set) => ({
         { sender: "ai", data: { isLoading: true, response: null } },
       ],
     })),
-  showAiResponse: (response) =>
-    set((state) => ({
-      thread: [
-        ...state.thread.slice(0, state.thread.length - 1),
-        { sender: "ai", data: { isLoading: false, response } },
-      ],
-    })),
+  showAiResponse: (response) => {
+    set((state) => {
+      const newThread = [...state.thread];
+      newThread[newThread.length - 1] = {
+        sender: "ai",
+        data: {
+          isLoading: false,
+          response: response,
+        },
+      };
+      return { thread: newThread };
+    });
+  },
 }));
