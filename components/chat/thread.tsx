@@ -16,7 +16,7 @@ const Thread = () => {
   useEffect(() => {
     setTimeout(() => {
       showAiResponse(["Hello there!"]);
-    }, 5000);
+    }, 8000);
   }, [thread]);
 
   return (

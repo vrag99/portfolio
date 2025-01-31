@@ -1,3 +1,4 @@
+"use client"
 import { create } from "zustand";
 import { Bubble, Thread } from "@/lib/types";
 
