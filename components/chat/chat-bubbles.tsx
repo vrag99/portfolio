@@ -3,8 +3,9 @@
 import { AiBubbleData } from "@/lib/types";
 import { Loader, Terminal } from "lucide-react";
 import React from "react";
-import { TextShimmerWave } from "../ui/text-shimmer-wave";
+import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
 import { cn } from "@/lib/utils";
+import { THINKING_PHRASES } from "@/lib/constants";
 
 export const UserBubble = ({ text }: { text: string }) => {
   return (
@@ -15,17 +16,9 @@ export const UserBubble = ({ text }: { text: string }) => {
 };
 
 export const AiBubble = ({ data }: { data: AiBubbleData }) => {
-  const thinkingPhrases = [
-    "Let me think about that...",
-    "Hmm, interesting question...",
-    "Drawing from my experience...",
-    "Connecting the dots...",
-    "Almost there...",
-    "One moment please...",
-    "Processing that thought...",
-  ];
+
   const phrase =
-    thinkingPhrases[Math.floor(Math.random() * thinkingPhrases.length)];
+    THINKING_PHRASES[Math.floor(Math.random() * THINKING_PHRASES.length)];
 
   return (
     <div className="self-start p-2 flex flex-row ">

@@ -16,6 +16,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.0",
+    "hono": "^4.7.2",
     "lucide-react": "^0.472.0",
     "motion": "^11.18.1",
     "next": "14.2.16",
@@ -23,6 +24,7 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

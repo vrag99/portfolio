@@ -1,6 +1,5 @@
-"use client"
 import { create } from "zustand";
-import { Bubble, Thread } from "@/lib/types";
+import { AiResponse, Bubble, Thread } from "@/lib/types";
 
 interface ChatStoreStates {
   userInput: string;
@@ -8,7 +7,7 @@ interface ChatStoreStates {
   setUserInput: (input: string) => void;
   addBubble: (bubble: Bubble) => void;
   addAiLoadingBubble: () => void;
-  showAiResponse: (response: string[]) => void;
+  showAiResponse: (response: AiResponse[]) => void;
 }
 
 export const useChatStore = create<ChatStoreStates>((set) => ({
