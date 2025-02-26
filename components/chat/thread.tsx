@@ -4,20 +4,32 @@ import React, { useEffect, useRef } from "react";
 import { UserBubble, AiBubble } from "./chat-bubbles";
 import { useChatStore } from "@/lib/store/chat-store";
 import { AnimatePresence, motion } from "motion/react";
+import axios from "axios";
 
 const Thread = () => {
-  const { thread, showAiResponse } = useChatStore();
+  const { thread, showAiResponse, userInput } = useChatStore();
   const endRef = useRef<HTMLDivElement | null>(null);
+  const hasBeenRendered = useRef(false);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [thread]);
 
   useEffect(() => {
-    setTimeout(() => {
-      showAiResponse(["Hello there!"]);
-    }, 8000);
-  }, [thread]);
+    if (hasBeenRendered.current) {
+      axios
+        .post("/api/chat", {
+          messages: [{ role: "user", content: userInput }],
+        })
+        .then((response) => {
+          console.log(response);
+          showAiResponse([{ type: "text", data: response.data }]);
+        });
+    }
+
+    hasBeenRendered.current = true;
+  }, [userInput]);
+
 
   return (
     <div className="gap-4 px-4 flex-1 flex flex-col">

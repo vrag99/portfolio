@@ -16,7 +16,6 @@ export const UserBubble = ({ text }: { text: string }) => {
 };
 
 export const AiBubble = ({ data }: { data: AiBubbleData }) => {
-
   const phrase =
     THINKING_PHRASES[Math.floor(Math.random() * THINKING_PHRASES.length)];
 
@@ -26,15 +25,17 @@ export const AiBubble = ({ data }: { data: AiBubbleData }) => {
         {data.isLoading ? (
           <Loader className="h-4 w-4 text-primary animate-spin" />
         ) : (
-          <Terminal className="h-4 w-4" />
+          <Terminal className="h-4 w-4 mr-2 mt-0.5" />
         )}
       </div>
       {data.isLoading ? (
         <TextShimmerWave className="font-medium">{phrase}</TextShimmerWave>
       ) : (
         <>
-          {data.response?.map((text, i) => (
-            <p className="font-medium text-muted-foreground" key={i}>{text}</p>
+          {data.response?.map((res, i) => (
+            <p className="font-medium text-muted-foreground leading-relaxed" key={i}>
+              {res.type === "text" ? res.data : ""}
+            </p>
           ))}
         </>
       )}
