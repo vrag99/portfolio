@@ -22,7 +22,6 @@ const Thread = () => {
           messages: [{ role: "user", content: userInput }],
         })
         .then((response) => {
-          console.log(response);
           showAiResponse([{ type: "text", data: response.data }]);
         });
     }

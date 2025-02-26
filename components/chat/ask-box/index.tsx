@@ -1,30 +1,12 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
 import { useChatStore } from "@/lib/store/chat-store";
-
-const COMMANDS: Command[] = [
-  {
-    name: "/about",
-    description: "know more about me",
-  },
-  {
-    name: "/projects",
-    description: "see what I have built",
-  },
-  {
-    name: "/achievements",
-    description: "view my achievements",
-  },
-  {
-    name: "/help",
-    description: "get help with navigating the site",
-  },
-];
+import { COMMANDS } from "@/lib/constants";
 
 const AskBox = ({
   commandBoxPosition = "top",
@@ -48,6 +30,7 @@ const AskBox = ({
   }, [inputValue, hasSelectedCommand]);
 
   const handleCommandSelect = (command: Command) => {
+    console.log('command recieved', command)
     setInputValue(command.name);
     setIsMenuOpen(false);
     setHasSelectedCommand(true);

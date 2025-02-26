@@ -31,6 +31,7 @@ const CommandMenu = ({
   }, [search, commands]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
+
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       switch (e.key) {
@@ -59,7 +60,7 @@ const CommandMenu = ({
           break;
       }
     },
-    [selectedIndex, filteredCommands, position, selectCommand]
+    [selectedIndex, filteredCommands]
   );
 
   useEffect(() => {
@@ -101,7 +102,7 @@ const CommandMenu = ({
             )}
           >
             {filteredCommands.map((command, index) => (
-              <button
+              <div
                 key={command.name}
                 className={cn(
                   "grid grid-cols-7 gap-4",
@@ -116,14 +117,13 @@ const CommandMenu = ({
               >
                 <p
                   className="col-span-2 text-left font-highlight italic"
-                  onClick={() => selectCommand(command)}
                 >
                   {command.name}
                 </p>
                 <p className="col-span-5 text-sm text-left text-muted-foreground">
                   {command.description}
                 </p>
-              </button>
+              </div>
             ))}
           </div>
         </motion.div>
