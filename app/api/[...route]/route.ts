@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import Groq from "groq-sdk";
-import { ABOUT, PROJECTS } from "@/data/portfolio";
+import { ABOUT, PROJECTS, SOCIALS, TIMELINE } from "@/data/portfolio";
 
 export const runtime = "edge";
 
@@ -32,10 +32,26 @@ app.post("/chat", async (c) => {
 
 app.get("/command", async (c) => {
   const { name } = c.req.query();
-  return c.json({
-    name,
-    message: "Command received",
-  });
+  switch (name) {
+    case "/about":
+      return c.json({
+        type: "text",
+        data: ABOUT,
+      });
+    case "/projects":
+      return c.json({
+        type: "projects",
+        data: PROJECTS,
+      });
+    case "/achievements":
+      return c.json(TIMELINE);
+    case "/socials":
+      return c.json(SOCIALS);
+    default:
+      return c.json({
+        message: "Command not found",
+      });
+  }
 });
 
 app.get("/about", async (c) => {

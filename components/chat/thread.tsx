@@ -17,18 +17,20 @@ const Thread = () => {
 
   useEffect(() => {
     if (hasBeenRendered.current) {
-      axios
-        .post("/api/chat", {
-          messages: [{ role: "user", content: userInput }],
-        })
-        .then((response) => {
-          showAiResponse([{ type: "text", data: response.data }]);
-        });
+      // axios
+      //   .post("/api/chat", {
+      //     messages: [{ role: "user", content: userInput }],
+      //   })
+      //   .then((response) => {
+      //     showAiResponse([{ type: "text", data: response.data }]);
+      //   });
+      axios.get(`/api/command?name=${userInput}`).then((response) => {
+        showAiResponse([response.data]);
+      });
     }
 
     hasBeenRendered.current = true;
   }, [userInput]);
-
 
   return (
     <div className="gap-4 px-4 flex-1 flex flex-col">

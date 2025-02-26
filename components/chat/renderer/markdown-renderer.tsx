@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Markdown from "markdown-to-jsx";
 import { motion, Variants } from "motion/react";
 
-// Define types for our props
 interface MarkdownRendererProps {
   markdown: string;
   customOverrides?: Record<string, any>;
@@ -10,7 +9,6 @@ interface MarkdownRendererProps {
   staggerDelay?: number;
 }
 
-// Define animation variants
 const containerVariants: Variants = {
   hidden: {},
   visible: {
@@ -40,31 +38,26 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   markdown,
   customOverrides = {},
   animationDelay = 0.2,
-  staggerDelay = 0.08,
+  staggerDelay = 0.1,
 }) => {
   const [lines, setLines] = useState<string[]>([]);
   const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
-    // Process the markdown to split into logical lines for animation
     const processedLines = [];
     const rawLines = markdown.split("\n");
 
-    // Process markdown to handle multiline elements appropriately
     let currentBlock = "";
     let inCodeBlock = false;
 
     for (const line of rawLines) {
-      // Handle code blocks specially to keep them together
       if (line.trim().startsWith("```")) {
         if (inCodeBlock) {
-          // End of code block
           currentBlock += line + "\n";
           processedLines.push(currentBlock);
           currentBlock = "";
           inCodeBlock = false;
         } else {
-          // Start of code block
           if (currentBlock.trim()) {
             processedLines.push(currentBlock);
           }
@@ -113,7 +106,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           currentBlock = "";
         }
       } else {
-        // For normal text content
         if (
           currentBlock.trim() &&
           (currentBlock.trim().startsWith("#") ||
@@ -127,7 +119,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       }
     }
 
-    // Add the last block if not empty
     if (currentBlock.trim()) {
       processedLines.push(currentBlock);
     }
@@ -136,7 +127,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
     setIsAnimating(true);
   }, [markdown]);
 
-  // Default styling with shadcn/ui color tokens
   const defaultOverrides = {
     h1: {
       component: ({ children, ...props }: { children: React.ReactNode }) => (
@@ -331,7 +321,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   return (
     <motion.div
       initial="hidden"
-      animate="visible"
+      animate={isAnimating ? "visible" : "hidden"}
+      onAnimationEnd={() => setIsAnimating(false)}
       variants={customContainerVariants}
     >
       {lines.map((line, index) => (
