@@ -6,6 +6,7 @@ import React from "react";
 import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
 import { cn } from "@/lib/utils";
 import { THINKING_PHRASES } from "@/lib/constants";
+import Renderer from "./renderer";
 
 export const UserBubble = ({ text }: { text: string }) => {
   return (
@@ -33,9 +34,7 @@ export const AiBubble = ({ data }: { data: AiBubbleData }) => {
       ) : (
         <>
           {data.response?.map((res, i) => (
-            <p className="font-medium text-muted-foreground leading-relaxed" key={i}>
-              {res.type === "text" ? res.data : ""}
-            </p>
+            <Renderer key={i} response={res} />
           ))}
         </>
       )}

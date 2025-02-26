@@ -41,6 +41,12 @@ importers:
       lucide-react:
         specifier: ^0.472.0
         version: 0.472.0(react@18.3.1)
+      markdown-to-jsx:
+        specifier: ^7.7.4
+        version: 7.7.4(react@18.3.1)
+      marked:
+        specifier: ^15.0.7
+        version: 15.0.7
       motion:
         specifier: ^11.18.1
         version: 11.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2045,6 +2051,17 @@ packages:
     resolution: {integrity: sha512-wdJH3xJAMuelsCgSZLBGQunk20xwFSMsuY7R4lrbLd/QsEPf/n6EmbGUnvux7+OjDJC248Kuja+5gWGpC7f3SA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  markdown-to-jsx@7.7.4:
+    resolution: {integrity: sha512-1bSfXyBKi+EYS3YY+e0Csuxf8oZ3decdfhOav/Z7Wrk89tjudyL5FOmwZQUoy0/qVXGUl+6Q3s2SWtpDEWITfQ==}
+    engines: {node: '>= 10'}
+    peerDependencies:
+      react: '>= 0.14.0'
+
+  marked@15.0.7:
+    resolution: {integrity: sha512-dgLIeKGLx5FwziAnsk4ONoGwHwGPJzselimvlVskE9XLN4Orv9u2VA3GWw/lYUqjfA0rUT/6fqKwfZJapP9BEg==}
+    engines: {node: '>= 18'}
+    hasBin: true
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -4852,6 +4869,12 @@ snapshots:
   lucide-react@0.472.0(react@18.3.1):
     dependencies:
       react: 18.3.1
+
+  markdown-to-jsx@7.7.4(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
+  marked@15.0.7: {}
 
   math-intrinsics@1.1.0: {}
 

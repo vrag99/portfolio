@@ -20,6 +20,8 @@
     "groq-sdk": "^0.15.0",
     "hono": "^4.7.2",
     "lucide-react": "^0.472.0",
+    "markdown-to-jsx": "^7.7.4",
+    "marked": "^15.0.7",
     "motion": "^11.18.1",
     "next": "14.2.16",
     "react": "^18",

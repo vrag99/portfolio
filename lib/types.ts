@@ -26,7 +26,7 @@ export type Social = {
 };
 
 // for chat
-type AiResponseBase<T extends "text" | "projects" | "timeline" | "social"> = {
+type AiResponseBase<T extends "text" | "projects" | "timeline" | "socials"> = {
   type: T;
   data: T extends "text"
     ? string
@@ -34,7 +34,7 @@ type AiResponseBase<T extends "text" | "projects" | "timeline" | "social"> = {
     ? Project[]
     : T extends "timeline"
     ? Achievement[]
-    : T extends "social"
+    : T extends "socials"
     ? Social[]
     : never;
 };
@@ -43,7 +43,7 @@ export type AiResponse =
   | AiResponseBase<"text">
   | AiResponseBase<"projects">
   | AiResponseBase<"timeline">
-  | AiResponseBase<"social">;
+  | AiResponseBase<"socials">;
 
 export type AiBubbleData = {
   isLoading: boolean;
