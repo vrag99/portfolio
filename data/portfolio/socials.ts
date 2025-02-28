@@ -1,25 +1,25 @@
 import { Social } from "@/lib/types";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { GithubIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from "./icons";
 
 export const SOCIALS: Social[] = [
   {
     title: "GitHub",
-    icon: Github,
     link: "http://github.com/vrag99",
+    icon: GithubIcon
   },
   {
     title: "LinkedIn",
-    icon: Linkedin,
     link: "https://www.linkedin.com/in/garv-makkar/",
+    icon: LinkedInIcon,
   },
   {
     title: "Twitter",
-    icon: Twitter,
     link: "https://twitter.com/vu1k4n_",
+    icon: TwitterIcon,
   },
   {
     title: "Email",
-    icon: Mail,
     link: "mailto:garv.codes@gmail.com",
+    icon: InstagramIcon,
   },
 ];

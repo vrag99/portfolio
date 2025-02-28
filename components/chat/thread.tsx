@@ -4,7 +4,8 @@ import React, { useEffect, useRef } from "react";
 import { UserBubble, AiBubble } from "./chat-bubbles";
 import { useChatStore } from "@/lib/store/chat-store";
 import { AnimatePresence, motion } from "motion/react";
-import axios from "axios";
+import { chat } from "@/lib/groq";
+import { getCommandResponse } from "@/lib/utils";
 
 const Thread = () => {
   const { thread, showAiResponse, userInput } = useChatStore();
@@ -17,16 +18,12 @@ const Thread = () => {
 
   useEffect(() => {
     if (hasBeenRendered.current) {
-      // axios
-      //   .post("/api/chat", {
-      //     messages: [{ role: "user", content: userInput }],
-      //   })
-      //   .then((response) => {
-      //     showAiResponse([{ type: "text", data: response.data }]);
-      //   });
-      axios.get(`/api/command?name=${userInput}`).then((response) => {
-        showAiResponse([response.data]);
-      });
+      // chat([{ role: "user", content: userInput }]).then((res) => {
+      //   showAiResponse([{ type: "text", data: res ?? "There was some error" }]);
+      // });
+
+      const res = getCommandResponse(userInput);
+      showAiResponse([res]);
     }
 
     hasBeenRendered.current = true;

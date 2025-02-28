@@ -1,5 +1,3 @@
-import { LucideIcon } from "lucide-react";
-
 export interface Command {
   name: string;
   description: string;
@@ -21,7 +19,7 @@ export type Achievement = {
 
 export type Social = {
   title: string;
-  icon: LucideIcon;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
   link: string;
 };
 
