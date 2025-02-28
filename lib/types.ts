@@ -1,3 +1,5 @@
+import { Icon } from "@phosphor-icons/react";
+
 export interface Command {
   name: string;
   description: string;
@@ -19,7 +21,7 @@ export type Achievement = {
 
 export type Social = {
   title: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  icon: Icon;
   link: string;
 };
 
