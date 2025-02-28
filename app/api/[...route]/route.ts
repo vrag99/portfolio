@@ -44,9 +44,15 @@ app.get("/command", async (c) => {
         data: PROJECTS,
       });
     case "/achievements":
-      return c.json(TIMELINE);
+      return c.json({
+        type: "timeline",
+        data: TIMELINE,
+      });
     case "/socials":
-      return c.json(SOCIALS);
+      return c.json({
+        type: "socials",
+        data: SOCIALS,
+      });
     default:
       return c.json({
         message: "Command not found",
