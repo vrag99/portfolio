@@ -10,7 +10,7 @@ const SocialsRenderer = ({ socials }: { socials: Social[] }) => {
       {socials.map((social, i) => (
         <motion.a
           key={i}
-          className="flex flex-col gap-2 px-8 py-4 bg-muted/30 rounded-lg border-b-2 transition-all duration-300 hover:bg-muted/40 md:hover:translate-y-5"
+          className="flex flex-col gap-2 px-8 py-4 bg-muted/30 rounded-lg border-b-2 transition-all duration-200 hover:bg-muted/40"
           target="_blank"
           rel="noopener noreferrer"
           href={social.link}

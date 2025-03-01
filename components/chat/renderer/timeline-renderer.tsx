@@ -5,28 +5,55 @@ import {
   TimelineDescription,
   TimelineTime,
   TimelineHeader,
-  TimelineItemType,
 } from "@/components/ui/timeline";
 import { Achievement } from "@/lib/types";
+import { motion } from "motion/react";
 
 const TimelineRenderer = ({ timeline }: { timeline: Achievement[] }) => {
   return (
     <Timeline>
       {timeline.map((item, i) => (
         <TimelineItem key={i}>
-          <TimelineHeader>
-            <TimelineTime variant={"outline"}>
-              {item.timestamp.toLocaleString("en-US", {
-                month: "short",
-                year: "numeric",
-              })}
-            </TimelineTime>
-            <TimelineTitle>{item.title}</TimelineTitle>
-          </TimelineHeader>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: i * 0.2, ease: "easeOut" }}
+          >
+            <TimelineHeader>
+              <TimelineTime variant={"outline"} className="border-b-2">
+                {item.timestamp.toLocaleString("en-US", {
+                  month: "short",
+                  year: "numeric",
+                })}
+              </TimelineTime>
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: i * 0.2,
+                  ease: "easeOut",
+                }}
+              >
+                <TimelineTitle>{item.title}</TimelineTitle>
+              </motion.div>
+            </TimelineHeader>
+          </motion.div>
           {item.description && (
-            <TimelineDescription className="font-medium">
-              {item.description}
-            </TimelineDescription>
+            <motion.div
+              initial={{ opacity: 0, x: -5 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.4,
+                delay: i * 0.2,
+                ease: "easeOut",
+                type: "spring",
+              }}
+            >
+              <TimelineDescription className="font-medium">
+                {item.description}
+              </TimelineDescription>
+            </motion.div>
           )}
         </TimelineItem>
       ))}
