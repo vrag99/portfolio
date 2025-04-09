@@ -60,7 +60,7 @@ const CommandMenu = ({
           break;
       }
     },
-    [selectedIndex, filteredCommands]
+    [position, selectCommand, filteredCommands, selectedIndex]
   );
 
   useEffect(() => {
@@ -101,15 +101,6 @@ const CommandMenu = ({
               position === "bottom" ? "flex-col" : "flex-col-reverse"
             )}
           >
-            {/* <div
-              className={cn(
-                "absolute",
-                "w-full h-10",
-                position === "top"
-                  ? "top-0 bg-gradient-to-b from-background to-transparent"
-                  : "bottom-0 bg-gradient-to-t from-background to-transparent"
-              )}
-            ></div> */}
             {filteredCommands.map((command, index) => (
               <div
                 key={command.name}

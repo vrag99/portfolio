@@ -1,4 +1,4 @@
-import { Icon } from "@phosphor-icons/react";
+
 
 export interface Command {
   name: string;
@@ -24,6 +24,11 @@ export type Social = {
   icon: 'github' | 'linkedin' | 'email' | 'twitter'; 
   link: string;
 };
+
+export type SkillSet = {
+  languages: string[];
+  technologies: string[];
+}
 
 // for chat
 type AiResponseBase<T extends "text" | "projects" | "timeline" | "socials"> = {

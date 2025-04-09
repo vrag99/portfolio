@@ -4,6 +4,7 @@ import { motion, Variants } from "motion/react";
 
 interface MarkdownRendererProps {
   markdown: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   customOverrides?: Record<string, any>;
   animationDelay?: number;
   staggerDelay?: number;
@@ -244,6 +245,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       ),
     },
     hr: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       component: (props: any) => (
         <hr {...props} className="my-6 border-border" />
       ),
