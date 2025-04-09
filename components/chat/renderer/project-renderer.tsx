@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
 
 const ProjectRenderer = ({ projects }: { projects: Project[] }) => {
   return (
-    <motion.div className="space-y-3">
+    <motion.div className="space-y-3 w-full">
       {projects.map((project, i) => (
         <motion.a
           key={i}
-          className="flex flex-col gap-2 border-l-2 border-primary px-2 py-3 bg-muted/30 rounded-r group"
+          className="flex flex-col gap-2 border-l-2 border-primary px-2 py-3 bg-muted/30 rounded-r group w-full"
           target="_blank"
           href={project.github}
           initial={{ opacity: 0, y: -20 }}

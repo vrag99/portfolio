@@ -21,7 +21,7 @@ const TimelineRenderer = ({ timeline }: { timeline: Achievement[] }) => {
           >
             <TimelineHeader>
               <TimelineTime variant={"outline"} className="border-b-2">
-                {item.timestamp.toLocaleString("en-US", {
+                {new Date(item.timestamp).toLocaleString("en-US", {
                   month: "short",
                   year: "numeric",
                 })}

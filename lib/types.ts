@@ -15,13 +15,13 @@ export type Project = {
 export type Achievement = {
   title: string;
   description: string;
-  timestamp: Date;
+  timestamp: string; // ISO format
   link: string;
 };
 
 export type Social = {
   title: string;
-  icon: Icon;
+  icon: 'github' | 'linkedin' | 'email' | 'twitter'; 
   link: string;
 };
 

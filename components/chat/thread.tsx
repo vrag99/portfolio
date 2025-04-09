@@ -6,6 +6,8 @@ import { useChatStore } from "@/lib/store/chat-store";
 import { AnimatePresence, motion } from "motion/react";
 import { chat } from "@/lib/groq";
 import { getCommandResponse } from "@/lib/utils";
+import { buildPrompt } from "@/lib/prompt";
+import { AiResponse } from "@/lib/types";
 
 const Thread = () => {
   const { thread, showAiResponse, userInput } = useChatStore();
@@ -18,14 +20,26 @@ const Thread = () => {
 
   useEffect(() => {
     if (hasBeenRendered.current) {
-      // chat([{ role: "user", content: userInput }]).then((res) => {
-      //   showAiResponse([{ type: "text", data: res ?? "There was some error" }]);
-      // });
-
-      const res = getCommandResponse(userInput);
-      showAiResponse([res]);
+      if (userInput.startsWith("/")) {
+        const res = getCommandResponse(userInput);
+        showAiResponse([res]);
+      } else {
+        chat([{ role: "user", content: buildPrompt(userInput) }])
+          .then((res) => {
+            const parsedResponse = JSON.parse(res ?? "[]");
+            showAiResponse(parsedResponse as AiResponse[]);
+          })
+          .catch((error) => {
+            console.error("Error parsing response:", error);
+            showAiResponse([
+              {
+                type: "text",
+                data: "Sorry, I couldn't process your request.",
+              },
+            ]);
+          });
+      }
     }
-
     hasBeenRendered.current = true;
   }, [userInput]);
 

@@ -14,8 +14,8 @@ export const COMMANDS: Command[] = [
     description: "view my achievements",
   },
   {
-    name: "/help",
-    description: "get help with navigating the site",
+    name: "/education",
+    description: "see where I studied",
   },
   {
     name: "/socials",

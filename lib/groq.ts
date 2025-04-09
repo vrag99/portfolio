@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import Groq from "groq-sdk";
 
@@ -19,4 +19,3 @@ export const chat = async (
 
   return chatCompletion?.choices[0].message.content;
 };
-

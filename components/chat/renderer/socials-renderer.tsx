@@ -1,5 +1,20 @@
 import { Social } from "@/lib/types";
+import {
+  Envelope,
+  GithubLogo,
+  Icon,
+  LinkedinLogo,
+  XLogo,
+} from "@phosphor-icons/react";
 import { motion } from "motion/react";
+import React from "react";
+
+const ICON_MAP: { [key: string]: Icon } = {
+  github: GithubLogo,
+  linkedin: LinkedinLogo,
+  twitter: XLogo,
+  email: Envelope,
+};
 
 const SocialsRenderer = ({ socials }: { socials: Social[] }) => {
   return (
@@ -23,10 +38,10 @@ const SocialsRenderer = ({ socials }: { socials: Social[] }) => {
             ease: "anticipate",
           }}
         >
-          <social.icon
-            weight="regular"
-            className="w-6 h-6 text-muted-foreground"
-          />
+          {React.createElement(ICON_MAP[social.icon], {
+            weight: "regular",
+            className: "w-6 h-6 text-muted-foreground",
+          })}
         </motion.a>
       ))}
     </motion.div>

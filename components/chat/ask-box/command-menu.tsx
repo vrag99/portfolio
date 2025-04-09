@@ -101,12 +101,22 @@ const CommandMenu = ({
               position === "bottom" ? "flex-col" : "flex-col-reverse"
             )}
           >
+            {/* <div
+              className={cn(
+                "absolute",
+                "w-full h-10",
+                position === "top"
+                  ? "top-0 bg-gradient-to-b from-background to-transparent"
+                  : "bottom-0 bg-gradient-to-t from-background to-transparent"
+              )}
+            ></div> */}
             {filteredCommands.map((command, index) => (
               <div
                 key={command.name}
+                tabIndex={index}
                 className={cn(
                   "grid grid-cols-7 gap-4",
-                  "rounded-2xl px-4 py-2",
+                  "rounded-xl px-4 py-2",
                   "border border-muted",
                   "transition-all duration-300",
                   selectedIndex === index
@@ -115,9 +125,7 @@ const CommandMenu = ({
                 )}
                 onClick={() => selectCommand(command)}
               >
-                <p
-                  className="col-span-2 text-left font-highlight italic"
-                >
+                <p className="col-span-2 text-left font-highlight italic">
                   {command.name}
                 </p>
                 <p className="col-span-5 text-sm text-left text-muted-foreground">

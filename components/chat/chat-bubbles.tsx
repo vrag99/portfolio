@@ -21,7 +21,7 @@ export const AiBubble = ({ data }: { data: AiBubbleData }) => {
     THINKING_PHRASES[Math.floor(Math.random() * THINKING_PHRASES.length)];
 
   return (
-    <div className="self-start p-2 flex flex-row ">
+    <div className="self-start p-2 flex flex-row">
       <div className={cn("w-6 h-6 mt-1")}>
         {data.isLoading ? (
           <Loader className="h-4 w-4 text-primary animate-spin" />
@@ -32,11 +32,11 @@ export const AiBubble = ({ data }: { data: AiBubbleData }) => {
       {data.isLoading ? (
         <TextShimmerWave className="font-medium">{phrase}</TextShimmerWave>
       ) : (
-        <>
+        <div className="space-y-1">
           {data.response?.map((res, i) => (
             <Renderer key={i} response={res} />
           ))}
-        </>
+        </div>
       )}
     </div>
   );

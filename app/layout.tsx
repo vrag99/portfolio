@@ -14,9 +14,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <script src="https://unpkg.com/react-scan/dist/auto.global.js" />
-      </head>
+      {process.env.NODE_ENV === "development" && (
+        <head>
+          <script
+            async
+            src="https://unpkg.com/react-scan/dist/auto.global.js"
+          />
+        </head>
+      )}
       <body
         className={`${satoshi.variable} ${geistMono.variable} ${newsreader.variable} font-sans antialiased`}
       >
