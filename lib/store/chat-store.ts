@@ -8,6 +8,7 @@ interface ChatStoreStates {
   addBubble: (bubble: Bubble) => void;
   addAiLoadingBubble: () => void;
   showAiResponse: (response: AiResponse[]) => void;
+  resetThread: () => void;
 }
 
 export const useChatStore = create<ChatStoreStates>((set) => ({
@@ -36,4 +37,5 @@ export const useChatStore = create<ChatStoreStates>((set) => ({
       return { thread: newThread };
     });
   },
+  resetThread: () => set({ thread: [] }),
 }));

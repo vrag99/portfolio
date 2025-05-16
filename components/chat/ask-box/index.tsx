@@ -8,6 +8,7 @@ import { Command } from "@/lib/types";
 import { COMMANDS } from "@/lib/constants";
 import { useAnswerUser } from "@/lib/prompt";
 import { useRouter } from "next/navigation";
+import { useChatStore } from "@/lib/store/chat-store";
 
 const AskBox = ({
   commandBoxPosition = "top",
@@ -20,6 +21,7 @@ const AskBox = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
+  const { resetThread } = useChatStore();
   const answerUser = useAnswerUser();
   const router = useRouter();
 
@@ -32,7 +34,7 @@ const AskBox = ({
   }, [inputValue, hasSelectedCommand]);
 
   const handleCommandSelect = (command: Command) => {
-    console.log('command recieved', command)
+    console.log("command recieved", command);
     setInputValue(command.name);
     setIsMenuOpen(false);
     setHasSelectedCommand(true);
@@ -42,12 +44,12 @@ const AskBox = ({
     e.preventDefault();
     inputRef.current?.blur();
     if (inputValue === "") return;
-
     if (navigateToChat) {
-      await answerUser(inputValue);
-      router.push('/chat');
+      resetThread();
+      answerUser(inputValue);
+      router.push("/chat");
     } else {
-      await answerUser(inputValue);
+      answerUser(inputValue);
     }
     setInputValue("");
   };
