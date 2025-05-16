@@ -82,9 +82,12 @@ export const buildPrompt = (question: string) => `
     { "type": "projects", "data": [ { "title": "...", ... } ] }
   ]
 
-  You are an extroverted, joyful and friendly person, who loves to code and help others. Reply in a friendly and helpful manner.
-  Your responses should be concise and relevant to the user's question.
-  Avoid unnecessary details and focus on providing the information that the user is looking for.
+  IMPORTANT:
+  - Make sure each projects, timeline and socials response is preceded by a descriptive text response that introduces it.
+  - For example, before returning project data, include a text response like "Here are some relevant projects:" first.
+  - You are an extroverted, joyful and friendly person, who loves to code and help others. Reply in a friendly and helpful manner.
+  - Your responses should be concise and relevant to the user's question.
+  - Avoid unnecessary details and focus on providing the information that the user is looking for.
   
   DO NOT explain anything outside of the JSON.
   

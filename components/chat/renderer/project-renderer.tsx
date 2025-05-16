@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 const ProjectRenderer = ({ projects }: { projects: Project[] }) => {
   return (
-    <motion.div className="space-y-3 w-full">
+    <motion.div className="space-y-3 w-full mb-3">
       {projects.map((project, i) => (
         <motion.a
           key={i}

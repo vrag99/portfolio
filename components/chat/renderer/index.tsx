@@ -1,8 +1,8 @@
 import { AiResponse } from "@/lib/types";
-import MarkdownRenderer from "./markdown-renderer";
 import ProjectRenderer from "./project-renderer";
 import TimelineRenderer from "./timeline-renderer";
 import SocialsRenderer from "./socials-renderer";
+import MarkdownRenderer from "./markdown-renderer";
 
 const Renderer = ({ response }: { response: AiResponse }) => {
   const type = response.type;
