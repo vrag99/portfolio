@@ -52,6 +52,7 @@ const AskBox = ({
       answerUser(inputValue);
     }
     setInputValue("");
+    setHasSelectedCommand(false);
   };
 
   return (

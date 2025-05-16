@@ -91,13 +91,13 @@ const CommandMenu = ({
           className={cn(
             "w-full",
             "rounded-2xl",
-            "absolute backdrop-blur-lg bg-background",
+            "absolute backdrop-blur-lg bg-background/50 border",
             position === "bottom" ? "top-16" : "bottom-16"
           )}
         >
           <div
             className={cn(
-              "flex gap-2",
+              "flex rounded-lg p-1.5",
               position === "bottom" ? "flex-col" : "flex-col-reverse"
             )}
           >
@@ -107,8 +107,7 @@ const CommandMenu = ({
                 tabIndex={index}
                 className={cn(
                   "grid grid-cols-7 gap-4",
-                  "rounded-xl px-4 py-2",
-                  "border border-muted",
+                  "rounded-lg px-4 py-1.5",
                   "transition-all duration-300",
                   selectedIndex === index
                     ? "bg-secondary/10 border-b-2 border-b-input"
@@ -116,10 +115,20 @@ const CommandMenu = ({
                 )}
                 onClick={() => selectCommand(command)}
               >
-                <p className="col-span-2 text-left font-highlight italic">
+                <p
+                  className={cn(
+                    "col-span-2 text-left font-highlight italic text-muted-foreground",
+                    selectedIndex === index && "text-foreground"
+                  )}
+                >
                   {command.name}
                 </p>
-                <p className="col-span-5 text-sm text-left text-muted-foreground">
+                <p
+                  className={cn(
+                    "col-span-5 text-sm text-left text-muted-foreground brightness-150",
+                    selectedIndex === index && "brightness-100"
+                  )}
+                >
                   {command.description}
                 </p>
               </div>
