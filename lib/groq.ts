@@ -19,3 +19,5 @@ export const chat = async (
 
   return chatCompletion?.choices[0].message.content;
 };
+
+

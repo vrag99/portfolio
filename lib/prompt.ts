@@ -1,18 +1,37 @@
-import { ABOUT, PROJECTS, SOCIALS, TIMELINE } from "@/data/portfolio";
+import {
+  ABOUT,
+  PROJECTS,
+  SKILL_SET,
+  SOCIALS,
+  TIMELINE,
+} from "@/data/portfolio";
+import { getCommandResponse } from "./utils";
+import { useChatStore } from "./store/chat-store";
+import { chat } from "./groq";
+import { AiResponse } from "./types";
 
 const buildResumeContext = (): string => {
   const projectsStr = PROJECTS.map(
-    (p) => `- ${p.title}: ${p.description} (Tech: ${p.tags.join(", ")}) (Link: ${p.github})`
+    (p) =>
+      `- ${p.title}: ${p.description} (Tech: ${p.tags.join(", ")}) (Link: ${
+        p.github
+      })`
   ).join("\n");
 
   const timelineStr = TIMELINE.map(
     (a) =>
-      `- ${a.title} (${a.timestamp}): ${
-        a.description
-      } ${a.link ? ` [Link](${a.link})` : ""}`
+      `- ${a.title} (${a.timestamp}): ${a.description} ${
+        a.link ? ` [Link](${a.link})` : ""
+      }`
   ).join("\n");
 
   const socialsStr = SOCIALS.map((s) => `- ${s.title}: ${s.link}`).join("\n");
+
+  const languagesStr = SKILL_SET.languages.map((l) => `- ${l}`).join("\n");
+
+  const technologiesStr = SKILL_SET.technologies
+    .map((t) => `- ${t}`)
+    .join("\n");
 
   return `
   About:
@@ -23,6 +42,12 @@ const buildResumeContext = (): string => {
   
   Achievements Timeline:
   ${timelineStr}
+
+  Skill Set:
+  - Languages:
+    ${languagesStr}
+  - Technologies:
+    ${technologiesStr}
   
   Socials:
   ${socialsStr}
@@ -70,3 +95,35 @@ export const buildPrompt = (question: string) => `
   
   User Question: ${question}
   `;
+
+export const useAnswerUser = () => {
+  const { showAiResponse, addAiLoadingBubble, addBubble } = useChatStore();
+
+  return (userInput: string) => {
+    addBubble({
+      sender: "user",
+      data: userInput,
+    });
+    addAiLoadingBubble();
+    if (userInput.startsWith("/")) {
+      const res = getCommandResponse(userInput);
+      showAiResponse([res]);
+    }
+    else {
+      chat([{ role: "user", content: buildPrompt(userInput) }])
+        .then((res) => {
+          const parsedResponse = JSON.parse(res ?? "[]") as AiResponse[];
+          showAiResponse(parsedResponse);
+        })
+        .catch((error) => {
+          console.error("Error parsing response:", error);
+          showAiResponse([
+            {
+              type: "text",
+              data: "Maybe something's off on my end right now. Sorry :(",
+            },
+          ]);
+        });
+    }
+  };
+};

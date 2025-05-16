@@ -5,21 +5,19 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
-import { useChatStore } from "@/lib/store/chat-store";
 import { COMMANDS } from "@/lib/constants";
+import { useAnswerUser } from "@/lib/prompt";
 
 const AskBox = ({
   commandBoxPosition = "top",
 }: {
   commandBoxPosition?: "top" | "bottom";
 }) => {
-  const { userInput, setUserInput } = useChatStore();
-  const [inputValue, setInputValue] = useState(userInput);
+  const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
-
-  const { addBubble, addAiLoadingBubble } = useChatStore();
+  const answerUser = useAnswerUser();
 
   useEffect(() => {
     if (inputValue.startsWith("/") && !hasSelectedCommand) {
@@ -38,17 +36,10 @@ const AskBox = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    inputRef.current?.blur();
     if (inputValue === "") return;
-    setUserInput(inputValue)
-    if (hasSelectedCommand || inputValue) {
-      addBubble({
-        sender: "user",
-        data: inputValue,
-      });
-      addAiLoadingBubble();
-      setInputValue("");
-      setHasSelectedCommand(false);
-    }
+    answerUser(inputValue)
+    setInputValue("")
   };
 
   return (
@@ -65,10 +56,10 @@ const AskBox = ({
           "transition-colors duration-300 focus:border-b-secondary/60"
         )}
         onChange={(e) => {
-          setInputValue(e.target.value);
           if (e.target.value === "") {
             setHasSelectedCommand(false);
           }
+          setInputValue(e.target.value);
         }}
         placeholder={`Ask me anything :) | Type "/" for commands`}
       />
