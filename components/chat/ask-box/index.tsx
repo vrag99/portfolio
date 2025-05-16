@@ -7,17 +7,21 @@ import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
 import { COMMANDS } from "@/lib/constants";
 import { useAnswerUser } from "@/lib/prompt";
+import { useRouter } from "next/navigation";
 
 const AskBox = ({
   commandBoxPosition = "top",
+  navigateToChat = false,
 }: {
   commandBoxPosition?: "top" | "bottom";
+  navigateToChat?: boolean;
 }) => {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
   const answerUser = useAnswerUser();
+  const router = useRouter();
 
   useEffect(() => {
     if (inputValue.startsWith("/") && !hasSelectedCommand) {
@@ -34,12 +38,18 @@ const AskBox = ({
     setHasSelectedCommand(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     inputRef.current?.blur();
     if (inputValue === "") return;
-    answerUser(inputValue)
-    setInputValue("")
+
+    if (navigateToChat) {
+      await answerUser(inputValue);
+      router.push('/chat');
+    } else {
+      await answerUser(inputValue);
+    }
+    setInputValue("");
   };
 
   return (

@@ -10,7 +10,7 @@ export default function Home() {
           <Hero />
         </BlurFade>
         <BlurFade delay={0.8} direction="up">
-          <AskBox commandBoxPosition="bottom" />
+          <AskBox commandBoxPosition="bottom" navigateToChat />
         </BlurFade>
       </div>
     </div>
