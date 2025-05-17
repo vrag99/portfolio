@@ -90,7 +90,7 @@ const CommandMenu = ({
           className={cn(
             "w-full",
             "rounded-2xl",
-            "absolute backdrop-blur-md bg-background/80 border",
+            "absolute backdrop-blur-md bg-background/80 border shadow-sm",
             position === "bottom" ? "top-16" : "bottom-16"
           )}
         >

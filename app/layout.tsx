@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { newsreader, geistMono, satoshi } from "./fonts";
+import Navbar from "@/components/ui/navbar";
 
 export const metadata: Metadata = {
   title: "Garv Makkar",
@@ -24,8 +25,9 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${satoshi.variable} ${geistMono.variable} ${newsreader.variable} font-sans antialiased`}
+        className={`${satoshi.variable} ${geistMono.variable} ${newsreader.variable} font-sans antialiased w-full h-screen flex flex-col`}
       >
+        <Navbar />
         {children}
       </body>
     </html>
