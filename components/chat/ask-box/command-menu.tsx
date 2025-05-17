@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-
 import { AnimatePresence } from "motion/react";
 import { useCallback } from "react";
 import { useState } from "react";
@@ -91,7 +90,7 @@ const CommandMenu = ({
           className={cn(
             "w-full",
             "rounded-2xl",
-            "absolute backdrop-blur-lg bg-background/50 border",
+            "absolute backdrop-blur-md bg-background/80 border",
             position === "bottom" ? "top-16" : "bottom-16"
           )}
         >

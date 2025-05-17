@@ -8,7 +8,7 @@ const ChatNavbar = () => {
       </div>
       <div
         id="shadow"
-        className="bg-gradient-to-b from-background to-transparent absolute top-10 w-full h-10"
+        className="bg-gradient-to-b from-background to-transparent absolute top-10 w-full h-5"
       ></div>
     </nav>
   );

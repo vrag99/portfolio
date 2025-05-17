@@ -7,14 +7,20 @@ import { AnimatePresence, motion } from "motion/react";
 
 const Thread = () => {
   const { thread } = useChatStore();
-  const endRef = useRef<HTMLDivElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight;
+    if (isAtBottom) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [thread]);
 
   return (
-    <div className="gap-4 px-4 flex-1 flex flex-col">
+    <div className="flex flex-col flex-1 overflow-y-auto space-y-4" ref={containerRef}>
       <AnimatePresence>
         {thread.map((bubble, i) => (
           <PushAnimationWrapper className="flex flex-col" key={i}>
@@ -25,8 +31,12 @@ const Thread = () => {
             )}
           </PushAnimationWrapper>
         ))}
+        <div
+          ref={bottomRef}
+          className="h-[1px] w-full flex-shrink-0 scroll-mt-4"
+          aria-hidden="true"
+        />
       </AnimatePresence>
-      <div ref={endRef} />
     </div>
   );
 };

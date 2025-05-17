@@ -40,7 +40,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   },
   em: function EmComponent({ className, children, ...props }) {
     return (
-      <em {...props} className={cn("font-highlight font-bold", className)}>
+      <em {...props} className={cn("font-highlight font-semibold tracking-tight", className)}>
         {children}
       </em>
     );
@@ -54,7 +54,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
       return (
         <span
           className={cn(
-            "bg-primary-foreground rounded-sm px-1 font-mono text-sm",
+            "bg-accent text-accent-foreground border-b border-accent-foreground/20 rounded-sm px-1 font-mono text-sm",
             className
           )}
           {...props}
@@ -71,9 +71,6 @@ const INITIAL_COMPONENTS: Partial<Components> = {
         <CodeBlockCode code={children as string} language={language} />
       </CodeBlock>
     );
-  },
-  pre: function PreComponent({ children }) {
-    return <>{children}</>;
   },
 };
 
