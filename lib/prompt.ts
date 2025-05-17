@@ -94,8 +94,7 @@ DATA STRUCTURES:
 RESPONSE GUIDELINES:
 1. Always start with a text response that directly answers the user's question
 2. Use Markdown formatting in text responses for better readability:
-   - Use **bold** for emphasis
-   - Use *italics* for secondary emphasis
+   - Use *italics* for emphasis
    - Use \`code\` for technical terms
    - Use bullet points for lists
    - Use [links](url) for references
@@ -122,12 +121,23 @@ EXAMPLE RESPONSE:
 ]
 
 IMPORTANT RULES:
-1. Always validate that your response is a valid JSON array
-2. Never include explanations outside the JSON structure
-3. Keep responses short and concise.
-4. Use Markdown formatting appropriately in text responses
-5. Prioritize text responses over data responses
-6. Maintain professional tone while being friendly
+1. Respond only with a **valid JSON array**. 
+2. **Never use literal line breaks (actual newlines) inside any JSON string value.** Only use the explicit \`\\n\` sequence for newlines within string values.
+   - Example valid response:
+     [{"type": "text", "data": "Line 1\\nLine 2\\n * Bullet 1\\n * Bullet 2"}]
+   - Example invalid response (this will break JSON parsing!):
+     [{"type": "text", "data": "Line 1
+     Line 2
+     * Bullet 1
+     * Bullet 2"}]
+3. If you need a new line or bullet point, always use \`\\n\` inside the string, never a real line break.
+4. Never include explanations outside the JSON structure.
+5. Keep responses short and concise.
+6. Use Markdown formatting appropriately in text responses.
+7. Prioritize text responses over data responses.
+8. Maintain professional tone while being friendly.
+
+**FINAL REMINDER:** If you use a real line break (actual newline) inside a JSON string, the response will fail to parse. Only use \`\\n\` for newlines inside JSON string values.
 
 CONTEXT:
 ${buildResumeContext()}
@@ -151,6 +161,7 @@ export const useAnswerUser = () => {
     else {
       chat([{ role: "user", content: buildPrompt(userInput) }])
         .then((res) => {
+          console.log(res);
           const parsedResponse = JSON.parse(res ?? "[]") as AiResponse[];
           showAiResponse(parsedResponse);
         })

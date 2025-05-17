@@ -40,7 +40,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   },
   em: function EmComponent({ className, children, ...props }) {
     return (
-      <em {...props} className={cn("font-highlight font-semibold tracking-tight", className)}>
+      <em {...props} className={cn("font-highlight font-medium text-primary underline underline-offset-2 decoration-wavy decoration-secondary/70 tracking-tight", className)}>
         {children}
       </em>
     );
