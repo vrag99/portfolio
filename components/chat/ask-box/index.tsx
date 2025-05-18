@@ -7,7 +7,7 @@ import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
 import { COMMANDS } from "@/lib/constants";
 import { useAnswerUser } from "@/lib/prompt";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import { useChatStore } from "@/lib/store/chat-store";
 
 const AskBox = ({
@@ -23,7 +23,7 @@ const AskBox = ({
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
   const { resetThread } = useChatStore();
   const answerUser = useAnswerUser();
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   useEffect(() => {
     if (inputValue.startsWith("/") && !hasSelectedCommand) {
@@ -65,7 +65,7 @@ const AskBox = ({
           "h-14",
           "px-5 py-4",
           "!text-base font-normal",
-          "border border-b-2 border-muted border-b-input dark:bg-card rounded-2xl",
+          "border-muted border-b-2 border-b-input dark:bg-card rounded-2xl",
           "transition-colors duration-300 focus:border-b-secondary/60"
         )}
         onChange={(e) => {

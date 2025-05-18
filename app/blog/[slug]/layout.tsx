@@ -16,7 +16,7 @@ export default function BlogLayout({
         "prose-pre:p-0 prose-pre:m-0 prose-pre:bg-transparent prose-pre:border-none prose-pre:rounded-none"
       )}
     >
-    {children}
+      {children}
     </main>
   );
 }

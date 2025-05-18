@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Moon, Sun } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { useTheme } from "next-themes";
@@ -44,7 +44,7 @@ const Navbar = () => {
         {NAV_ITEMS.map((item, index) => (
           <Link
             className={cn(
-              "font-serif italic text-muted-foreground transition-colors duration-300",
+              "font-mono tracking-tight text-sm text-muted-foreground transition-colors duration-300",
               pathname === item.href
                 ? "text-primary underline underline-offset-4 font-medium decoration-secondary/70 dark:decoration-secondary-foreground/50 decoration-wavy"
                 : "hover:text-primary"

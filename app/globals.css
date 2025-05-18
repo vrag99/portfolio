@@ -117,8 +117,9 @@ body {
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 10.2% / 0.25);
 }
 
-body {
+html {
   letter-spacing: var(--tracking-tight);
+  scrollbar-gutter: stable;
 }
 
 @layer base {

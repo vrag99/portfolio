@@ -41,7 +41,7 @@ function CodeBlockCode({
   const [highlightedHtml, setHighlightedHtml] = useState<string | null>(null);
 
   const { theme } = useTheme();
-  const codeTheme = theme === "dark" ? "vesper" : "rose-pine-dawn";
+  const codeTheme = theme === "light" ? "rose-pine-dawn" : "vesper";
 
   useEffect(() => {
     async function highlight() {
