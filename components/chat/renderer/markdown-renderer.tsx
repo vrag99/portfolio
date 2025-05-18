@@ -17,7 +17,7 @@ export default function MarkdownRenderer({ markdown }: { markdown: string }) {
   }, [startStreaming]);
 
   return (
-    <Markdown className="prose prose-sm dark:prose-invert">
+    <Markdown className="prose dark:prose-invert">
       {displayedText}
     </Markdown>
   );

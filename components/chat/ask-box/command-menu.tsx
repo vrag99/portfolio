@@ -90,7 +90,7 @@ const CommandMenu = ({
           className={cn(
             "w-full",
             "rounded-2xl",
-            "absolute backdrop-blur-md bg-background/80 border shadow-sm",
+            "absolute backdrop-blur-md bg-background/80 dark:bg-card/80 border shadow-sm",
             position === "bottom" ? "top-16" : "bottom-16"
           )}
         >
@@ -107,25 +107,25 @@ const CommandMenu = ({
                 className={cn(
                   "grid grid-cols-7 gap-4",
                   "rounded-lg px-4 py-1.5",
-                  "transition-all duration-300",
+                  "*:transition-all",
                   selectedIndex === index
-                    ? "bg-secondary/10 border-b-2 border-b-input"
+                    ? "bg-secondary/10 dark:bg-secondary border-b-2"
                     : "hover:bg-secondary/5"
                 )}
                 onClick={() => selectCommand(command)}
               >
                 <p
                   className={cn(
-                    "col-span-2 text-left font-highlight italic text-muted-foreground",
-                    selectedIndex === index && "text-foreground"
+                    "col-span-2 text-left italic font-serif text-muted-foreground",
+                    selectedIndex === index && "text-foreground dark:text-secondary-foreground"
                   )}
                 >
                   {command.name}
                 </p>
                 <p
                   className={cn(
-                    "col-span-5 text-sm text-left text-muted-foreground brightness-150",
-                    selectedIndex === index && "brightness-100"
+                    "col-span-5 text-sm text-left text-muted-foreground brightness-150 dark:brightness-50",
+                    selectedIndex === index && "brightness-100 dark:brightness-100"
                   )}
                 >
                   {command.description}

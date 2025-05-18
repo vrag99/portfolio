@@ -7,7 +7,7 @@ const Hero = () => {
       <h2 className="text-2xl lg:text-3xl text-muted-foreground inline-flex items-baseline whitespace-pre-wrap">
         & I love to{" "}
         <TextLoop
-          className="font-highlight text-secondary font-bold italic self-baseline"
+          className="font-serif text-secondary dark:text-primary font-bold italic self-baseline"
           transition={{
             type: "spring",
             stiffness: 900,

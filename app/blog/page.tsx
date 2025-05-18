@@ -1,9 +1,11 @@
-import React from 'react'
+"use client";
+
+import Test from "@/data/blog/test.mdx";
 
 const Blog = () => {
   return (
-    <div>Blog</div>
-  )
-}
+    <Test />
+  );
+};
 
-export default Blog
+export default Blog;

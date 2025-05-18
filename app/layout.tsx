@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { newsreader, geistMono, satoshi } from "./fonts";
+import { newsreader, geistMono, satoshi, architectsDaughter } from "./fonts";
 import Navbar from "@/components/ui/navbar";
+import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: "Garv Makkar",
@@ -25,10 +26,16 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${satoshi.variable} ${geistMono.variable} ${newsreader.variable} font-sans antialiased w-full h-screen flex flex-col`}
+        className={`${satoshi.variable} ${architectsDaughter.variable} ${geistMono.variable} ${newsreader.variable} font-sans antialiased`}
       >
-        <Navbar />
-        {children}
+         <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
+            <Navbar />
+            {children}
+          </ThemeProvider>
       </body>
     </html>
   );

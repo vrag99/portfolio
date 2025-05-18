@@ -10,7 +10,7 @@ import Renderer from "./renderer";
 
 export const UserBubble = ({ text }: { text: string }) => {
   return (
-    <p className="px-4 py-1.5 self-end rounded-xl bg-accent text-accent-foreground font-medium w-fit">
+    <p className="px-4 py-1.5 self-end rounded-xl bg-accent text-accent-foreground font-medium text-sm w-fit">
       {text}
     </p>
   );

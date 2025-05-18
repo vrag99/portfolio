@@ -65,7 +65,7 @@ const AskBox = ({
           "h-14",
           "px-5 py-4",
           "!text-base font-normal",
-          "border border-b-2 border-muted border-b-input rounded-2xl",
+          "border border-b-2 border-muted border-b-input dark:bg-card rounded-2xl",
           "transition-colors duration-300 focus:border-b-secondary/60"
         )}
         onChange={(e) => {

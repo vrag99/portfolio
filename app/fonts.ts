@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { Architects_Daughter } from "next/font/google";
 
 export const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
@@ -22,4 +23,10 @@ export const newsreader = localFont({
     },
   ],
   variable: "--font-newsreader",
+});
+
+export const architectsDaughter = Architects_Daughter({
+  subsets: ["latin"],
+  variable: "--font-architects-daughter",
+  weight: "400",
 });

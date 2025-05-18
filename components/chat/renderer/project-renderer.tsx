@@ -26,7 +26,7 @@ const ProjectRenderer = ({ projects }: { projects: Project[] }) => {
           }}
         >
           <motion.div className="inline-flex items-center gap-2 text-primary">
-            <h1 className="text-2xl font-highlight font-semibold italic">
+            <h1 className="text-2xl font-serif italic font-semibold">
               {project.title}
             </h1>
             <ExternalLinkIcon

@@ -11,8 +11,16 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-satoshi)", "sans-serif"],
-        highlight: ["var(--font-newsreader)", "serif"],
+        highlight: ["var(--font-architects-daughter)", "serif"],
+        serif: ["var(--font-newsreader)", "serif"],
         mono: ["var(--font-geist-mono)", "monospace"],
+      },
+      typography: {
+        DEAFULT: {
+          css: {
+            pre: null
+          }
+        }
       },
       colors: {
         background: "hsl(var(--background))",
@@ -63,6 +71,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"), 
+    require("@tailwindcss/typography")
+  ],
 };
 export default config;

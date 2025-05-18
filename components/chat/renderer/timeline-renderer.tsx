@@ -35,7 +35,7 @@ const TimelineRenderer = ({ timeline }: { timeline: Achievement[] }) => {
                   ease: "easeOut",
                 }}
               >
-                <TimelineTitle>{item.title}</TimelineTitle>
+                <TimelineTitle className="font-serif italic">{item.title}</TimelineTitle>
               </motion.div>
             </TimelineHeader>
           </motion.div>
