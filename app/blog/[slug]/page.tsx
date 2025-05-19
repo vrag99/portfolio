@@ -1,13 +1,35 @@
-import { getBlogSlugs, getPostMetadata } from "@/data/utils";
+import { getPostMetadata } from "@/data/utils";
+import { notFound } from "next/navigation";
 
-export default async function Page({
+// TODO: Use SSG here
+
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { default: Post } = await import(`@/data/blog/${slug}.mdx`);
-  const metadata = await getPostMetadata(slug);
+  try {
+    const metadata = getPostMetadata(slug);
+    return {
+      title: metadata.title,
+      description: metadata.description,
+    };
+  } catch {
+    return notFound();
+  }
+}
+
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+  let Post;
+  try {
+    const mod = await import(`@/data/blog/${slug}.mdx`);
+    Post = mod.default;
+  } catch {
+    return notFound();
+  }
+  const metadata = getPostMetadata(slug as string);
 
   return (
     <>
@@ -19,10 +41,3 @@ export default async function Page({
     </>
   );
 }
-
-export const generateStaticParams = () => {
-  const slugs = getBlogSlugs();
-  return slugs.map((slug) => ({ slug: slug }));
-};
-
-export const dynamicParams = false;

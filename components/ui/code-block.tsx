@@ -39,9 +39,7 @@ function CodeBlockCode({
   ...props
 }: CodeBlockCodeProps) {
   const [highlightedHtml, setHighlightedHtml] = useState<string | null>(null);
-
   const { theme } = useTheme();
-  const codeTheme = theme === "light" ? "rose-pine-dawn" : "vesper";
 
   useEffect(() => {
     async function highlight() {
@@ -50,11 +48,14 @@ function CodeBlockCode({
         return;
       }
 
-      const html = await codeToHtml(code, { lang: language, theme: codeTheme });
+      const html = await codeToHtml(code, {
+        lang: language,
+        theme: theme === "light" ? "rose-pine-dawn" : "vesper",
+      });
       setHighlightedHtml(html);
     }
     highlight();
-  }, [code, language, codeTheme]);
+  }, [code, language, theme]);
 
   const classNames = cn(
     "w-full overflow-x-auto text-[13px] [&>pre]:px-4 [&>pre]:py-4 [&>pre]:overflow-x-auto [&>pre]:rounded-b-xl",

@@ -8,8 +8,8 @@ const Blog = () => {
       <h1 className="text-2xl tracking-tight font-semibold font-mono text-primary">
         /blog
       </h1>
-      <p className="text-muted-foreground">
-        A collection of my writings.
+      <p className="text-muted-foreground mt-0.5">
+        A collection of my writings, thoughts, and ideas.
       </p>
       <div className="space-y-4 mt-4">
         {blogsMetadata.map((blog) => {

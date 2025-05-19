@@ -105,7 +105,7 @@ const CommandMenu = ({
                 key={command.name}
                 tabIndex={index}
                 className={cn(
-                  "grid grid-cols-7 gap-4",
+                  "grid grid-cols-8 gap-4",
                   "rounded-lg px-4 py-1.5",
                   "*:transition-all",
                   selectedIndex === index
@@ -116,7 +116,7 @@ const CommandMenu = ({
               >
                 <p
                   className={cn(
-                    "col-span-2 text-left italic font-serif text-muted-foreground",
+                    "col-span-3 text-left font-mono font-normal tracking-tight text-sm text-muted-foreground",
                     selectedIndex === index && "text-foreground dark:text-secondary-foreground"
                   )}
                 >
