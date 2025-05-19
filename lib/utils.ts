@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import { ABOUT, PROJECTS, TIMELINE, SOCIALS } from "@/data/portfolio";
+import { ABOUT, PROJECTS, TIMELINE, SOCIALS } from "@/content/portfolio";
 import { AiResponse } from "./types";
 
 export function cn(...inputs: ClassValue[]) {

@@ -1,4 +1,4 @@
-import { getPostMetadata } from "@/data/utils";
+import { getPostMetadata } from "@/content/utils";
 import { notFound } from "next/navigation";
 
 // TODO: Use SSG here
@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
   let Post;
   try {
-    const mod = await import(`@/data/blog/${slug}.mdx`);
+    const mod = await import(`@/content/blog/${slug}.mdx`);
     Post = mod.default;
   } catch {
     return notFound();

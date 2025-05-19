@@ -1,4 +1,4 @@
-import { getBlogsMetadata } from "@/data/utils";
+import { getBlogsMetadata } from "@/content/utils";
 import { Link } from "next-view-transitions";
 
 const Blog = () => {

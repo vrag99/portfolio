@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 
 export const getBlogsMetadata = () => {
-  const blogDir = path.join(process.cwd(), "data", "blog");
+  const blogDir = path.join(process.cwd(), "content", "blog");
   const files = fs.readdirSync(blogDir);
   const metadata = files.map((file) => {
     const fileContent = fs.readFileSync(
@@ -18,14 +18,14 @@ export const getBlogsMetadata = () => {
 };
 
 export const getPostMetadata = (slug: string) => {
-  const blogDir = path.join(process.cwd(), "data", "blog");
+  const blogDir = path.join(process.cwd(), "content", "blog");
   const file = fs.readFileSync(path.join(blogDir, `${slug}.mdx`), "utf8");
   const { data } = matter(file);
   return data;
 }
 
 export const getBlogSlugs = () => {
-  const blogDir = path.join(process.cwd(), "data", "blog");
+  const blogDir = path.join(process.cwd(), "content", "blog");
   const files = fs.readdirSync(blogDir);
   return files.map((file) => file.replace(".mdx", ""));
 };

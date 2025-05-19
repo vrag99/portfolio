@@ -4,7 +4,7 @@ import {
   SKILL_SET,
   SOCIALS,
   TIMELINE,
-} from "@/data/portfolio";
+} from "@/content/portfolio";
 import { getCommandResponse } from "./utils";
 import { useChatStore } from "./store/chat-store";
 import { chat } from "./groq";
