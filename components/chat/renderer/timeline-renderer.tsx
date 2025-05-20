@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/timeline";
 import { Achievement } from "@/lib/types";
 import { motion } from "motion/react";
-
+import Link from "next/link";
 const TimelineRenderer = ({ timeline }: { timeline: Achievement[] }) => {
   return (
     <Timeline>
@@ -35,7 +35,15 @@ const TimelineRenderer = ({ timeline }: { timeline: Achievement[] }) => {
                   ease: "easeOut",
                 }}
               >
-                <TimelineTitle className="font-serif italic">{item.title}</TimelineTitle>
+                <TimelineTitle className="font-serif italic">
+                  <Link
+                    target="_blank"
+                    className="transition-all hover:underline hover:underline-offset-2 hover:decoration-dashed"
+                    href={item.link}
+                  >
+                    {item.title}
+                  </Link>
+                </TimelineTitle>
               </motion.div>
             </TimelineHeader>
           </motion.div>

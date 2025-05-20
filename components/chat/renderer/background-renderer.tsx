@@ -8,6 +8,7 @@ import {
   TimelineHeader,
 } from "@/components/ui/timeline";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 // TODO: make a custom renderer like linkedin for experience and education
 
@@ -48,7 +49,13 @@ const BackgroundRenderer = ({ background }: { background: Background[] }) => {
                 }}
               >
                 <TimelineTitle className="font-serif italic">
-                  {item.title}
+                  <Link
+                    target="_blank"
+                    className="transition-all hover:underline hover:underline-offset-2 hover:decoration-dashed"
+                    href={item.link}
+                  >
+                    {item.title}
+                  </Link>
                 </TimelineTitle>
               </motion.div>
             </TimelineHeader>

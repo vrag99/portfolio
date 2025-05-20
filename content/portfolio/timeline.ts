@@ -2,6 +2,12 @@ import { Achievement } from "@/lib/types";
 
 export const TIMELINE: Achievement[] = [
   {
+    title: "Calimero x ICP Hackathon" ,
+    description: "1st in the Calimero x ICP Hackathon main track (12,000$)",
+    timestamp: "2025-02",
+    link: "https://x.com/CalimeroNetwork/status/1894382817192120478",
+  },
+  {
     title: "Funding the Commons & Earth Commons Hackathon",
     description: "1st in Decentralized AI by NEAR Protocol Category ($10,000)",
     timestamp: "2024-11",
