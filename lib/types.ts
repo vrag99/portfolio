@@ -17,6 +17,14 @@ export type Achievement = {
   link: string;
 };
 
+export type Background = {
+  title: string;
+  description: string;
+  startTime: string;
+  endTime?: string;
+  link: string;
+};
+
 export type Social = {
   title: string;
   icon: 'github' | 'linkedin' | 'email' | 'twitter'; 
@@ -29,7 +37,7 @@ export type SkillSet = {
 }
 
 // for chat
-type AiResponseBase<T extends "text" | "projects" | "timeline" | "socials"> = {
+type AiResponseBase<T extends "text" | "projects" | "timeline" | "socials" | "background"> = {
   type: T;
   data: T extends "text"
     ? string
@@ -39,6 +47,8 @@ type AiResponseBase<T extends "text" | "projects" | "timeline" | "socials"> = {
     ? Achievement[]
     : T extends "socials"
     ? Social[]
+    : T extends "background"
+    ? Background[]
     : never;
 };
 
@@ -46,7 +56,8 @@ export type AiResponse =
   | AiResponseBase<"text">
   | AiResponseBase<"projects">
   | AiResponseBase<"timeline">
-  | AiResponseBase<"socials">;
+  | AiResponseBase<"socials">
+  | AiResponseBase<"background">;
 
 export type AiBubbleData = {
   isLoading: boolean;

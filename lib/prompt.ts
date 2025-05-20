@@ -4,6 +4,8 @@ import {
   SKILL_SET,
   SOCIALS,
   TIMELINE,
+  EXPERIENCE,
+  EDUCATION,
 } from "@/content/portfolio";
 import { getCommandResponse } from "./utils";
 import { useChatStore } from "./store/chat-store";
@@ -33,6 +35,36 @@ const buildResumeContext = (): string => {
     .map((t) => `- ${t}`)
     .join("\n");
 
+  const experienceStr = EXPERIENCE.map(
+    (e) =>
+      `- ${e.title}: ${e.description} (${new Date(e.startTime).toLocaleString(
+        "en-US",
+        { month: "short", year: "numeric" }
+      )}${
+        e.endTime
+          ? ` - ${new Date(e.endTime).toLocaleString("en-US", {
+              month: "short",
+              year: "numeric",
+            })}`
+          : ""
+      }) (Link: ${e.link})`
+  ).join("\n");
+
+  const educationStr = EDUCATION.map(
+    (e) =>
+      `- ${e.title}: ${e.description} (${new Date(e.startTime).toLocaleString(
+        "en-US",
+        { month: "short", year: "numeric" }
+      )}${
+        e.endTime
+          ? ` - ${new Date(e.endTime).toLocaleString("en-US", {
+              month: "short",
+              year: "numeric",
+            })}`
+          : ""
+      }) (Link: ${e.link})`
+  ).join("\n");
+
   return `
   About:
   ${ABOUT}
@@ -42,6 +74,12 @@ const buildResumeContext = (): string => {
   
   Achievements Timeline:
   ${timelineStr}
+
+  Experience:
+  ${experienceStr}
+
+  Education:
+  ${educationStr}
 
   Skill Set:
   - Languages:
@@ -68,8 +106,8 @@ You must respond with a valid JSON array containing one or more response objects
 
 2. Supporting Data Responses (Optional):
    {
-     "type": "projects" | "timeline" | "socials",
-     "data": Project[] | Achievement[] | Social[]
+     "type": "projects" | "timeline" | "socials" | "background",
+     "data": Project[] | Achievement[] | Social[] | Background[]
    }
 
 DATA STRUCTURES:
@@ -89,6 +127,13 @@ DATA STRUCTURES:
     "title": string,
     "link": string,
     "icon": string // 'github' | 'linkedin' | 'email' | 'twitter'
+  }
+- Background = {
+    "title": string,
+    "description": string,
+    "startTime": string,
+    "endTime"?: string,
+    "link": string
   }
 
 RESPONSE GUIDELINES:
@@ -157,8 +202,7 @@ export const useAnswerUser = () => {
     if (userInput.startsWith("/")) {
       const res = getCommandResponse(userInput);
       showAiResponse([res]);
-    }
-    else {
+    } else {
       chat([{ role: "user", content: buildPrompt(userInput) }])
         .then((res) => {
           console.log(res);

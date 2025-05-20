@@ -1,7 +1,14 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import {
+  ABOUT,
+  PROJECTS,
+  TIMELINE,
+  SOCIALS,
+  EDUCATION,
+  EXPERIENCE,
+} from "@/content/portfolio";
 
-import { ABOUT, PROJECTS, TIMELINE, SOCIALS } from "@/content/portfolio";
 import { AiResponse } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
@@ -29,6 +36,16 @@ export function getCommandResponse(command: string): AiResponse {
       return {
         type: "socials",
         data: SOCIALS,
+      };
+    case "/education":
+      return {
+        type: "background",
+        data: EDUCATION,
+      };
+    case "/experience":
+      return {
+        type: "background",
+        data: EXPERIENCE,
       };
     default:
       return {
