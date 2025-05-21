@@ -7,7 +7,7 @@ import { ViewTransitions } from "next-view-transitions";
 
 export const metadata: Metadata = {
   title: "Garv Makkar",
-  description: "This is my portfolio",
+  description: "Design. Dismantle. Discover.",
 };
 
 export default function RootLayout({
