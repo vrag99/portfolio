@@ -36,6 +36,19 @@ const Hero = () => {
           <span>break stuff</span>
         </TextLoop>
       </h2>
+      
+      <div className="max-w-2xl text-center space-y-4 mt-8">
+        <p className="text-lg text-muted-foreground leading-relaxed">
+          I'm a passionate developer who enjoys building innovative solutions and exploring new technologies. 
+          When I'm not coding, you'll find me tinkering with projects, learning about the latest tech trends, 
+          or diving deep into problem-solving challenges.
+        </p>
+        <p className="text-lg text-muted-foreground leading-relaxed">
+          I believe in the power of technology to create meaningful impact and love sharing knowledge with 
+          the developer community. Whether it's building web applications, experimenting with AI, or 
+          contributing to open source projects, I'm always excited about the next creative challenge.
+        </p>
+      </div>
     </>
   );
 };
