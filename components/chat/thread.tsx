@@ -4,8 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { UserBubble, AiBubble } from "./chat-bubbles";
 import { useChatStore } from "@/lib/store/chat-store";
 import { AnimatePresence, motion } from "motion/react";
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport, UIMessage } from "ai";
+import { UIMessage } from "ai";
 
 const Thread = ({ messages }: { messages: UIMessage[] }) => {
   const { thread } = useChatStore();

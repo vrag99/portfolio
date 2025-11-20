@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
-import { COMMANDS, THINKING_PHRASES } from "@/lib/constants";
+import { COMMANDS } from "@/lib/constants";
 import { ChatStatus } from "ai";
 import { Button } from "@/components/ui/button";
 import { Send, Squircle } from "lucide-react";
@@ -23,6 +23,22 @@ const AskBox = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
+
+  // Handle "/" key to focus input
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only trigger if "/" is pressed and input is not already focused
+      if (e.key === "/" && document.activeElement !== inputRef.current) {
+        e.preventDefault();
+        inputRef.current?.focus();
+        // Set the "/" character in the input
+        setInputValue("/");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     if (inputValue.startsWith("/") && !hasSelectedCommand) {

@@ -92,7 +92,7 @@ const Renderer = (props: RendererProps) => {
       case "input-available":
         return <div className="text-sm text-muted-foreground">Loading experience...</div>;
       case "output-available":
-        return <BackgroundRenderer background={part.output as Background[]} />;
+        return <BackgroundRenderer background={(part.output as Record<string, unknown>).experience as Background[]} />;
       case "output-error":
         return <div className="text-sm text-destructive">Error loading experience: {part.errorText}</div>;
       default:
@@ -106,7 +106,7 @@ const Renderer = (props: RendererProps) => {
       case "input-available":
         return <div className="text-sm text-muted-foreground">Loading education...</div>;
       case "output-available":
-        return <BackgroundRenderer background={part.output as Background[]} />;
+        return <BackgroundRenderer background={(part.output as Record<string, unknown>).education as Background[]} />;
       case "output-error":
         return <div className="text-sm text-destructive">Error loading education: {part.errorText}</div>;
       default:

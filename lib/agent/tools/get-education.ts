@@ -6,7 +6,7 @@ export const getEducationTool = createTool({
   name: "get_education",
   description:
     "Get Garv's educational background including university, degree, and academic information. Use this when the user asks about education, university, degree, or academic background.",
-  parameters: z.object({}),
+  parameters: z.object({}).optional(),
   execute: async () => {
     return {
       education: EDUCATION,
