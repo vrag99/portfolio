@@ -11,6 +11,7 @@ import { getCommandResponse } from "./utils";
 import { useChatStore } from "./store/chat-store";
 import { chat } from "./groq";
 import { AiResponse } from "./types";
+import { agent } from "./agent";
 
 const buildResumeContext = (): string => {
   const projectsStr = PROJECTS.map(
@@ -78,7 +79,7 @@ const buildResumeContext = (): string => {
   Experience:
   ${experienceStr}
 
-  Education:
+  Education:¡
   ${educationStr}
 
   Skill Set:
@@ -191,7 +192,7 @@ USER QUESTION: ${question}
 `;
 
 export const useAnswerUser = () => {
-  const { showAiResponse, addAiLoadingBubble, addBubble } = useChatStore();
+  const { addBubble, showAiResponse, addAiLoadingBubble } = useChatStore();
 
   return (userInput: string) => {
     addBubble({
@@ -201,6 +202,7 @@ export const useAnswerUser = () => {
     addAiLoadingBubble();
     if (userInput.startsWith("/")) {
       const res = getCommandResponse(userInput);
+      console.log("command response", res);
       showAiResponse([res]);
     } else {
       chat([{ role: "user", content: buildPrompt(userInput) }])

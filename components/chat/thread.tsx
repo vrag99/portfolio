@@ -4,8 +4,10 @@ import React, { useEffect, useRef } from "react";
 import { UserBubble, AiBubble } from "./chat-bubbles";
 import { useChatStore } from "@/lib/store/chat-store";
 import { AnimatePresence, motion } from "motion/react";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport, UIMessage } from "ai";
 
-const Thread = () => {
+const Thread = ({ messages }: { messages: UIMessage[] }) => {
   const { thread } = useChatStore();
   const bottomRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,21 +15,25 @@ const Thread = () => {
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
-    const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight;
+    const isAtBottom =
+      container.scrollTop + container.clientHeight >= container.scrollHeight;
     if (isAtBottom) {
       bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [thread]);
 
   return (
-    <div className="flex flex-col flex-1 overflow-y-auto space-y-4" ref={containerRef}>
+    <div
+      className="flex flex-col flex-1 overflow-y-auto space-y-4"
+      ref={containerRef}
+    >
       <AnimatePresence>
-        {thread.map((bubble, i) => (
+        {messages.map((message, i) => (
           <PushAnimationWrapper className="flex flex-col" key={i}>
-            {bubble.sender === "user" ? (
-              <UserBubble text={bubble.data} />
+            {message.role === "user" ? (
+              <UserBubble message={message} />
             ) : (
-              <AiBubble data={bubble.data} />
+              <AiBubble message={message} />
             )}
           </PushAnimationWrapper>
         ))}
@@ -50,10 +56,9 @@ function PushAnimationWrapper({
 }) {
   return (
     <motion.div
-      layout
       className={className}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{
         opacity: { duration: 0.3 },
       }}

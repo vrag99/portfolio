@@ -5,25 +5,24 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
-import { COMMANDS } from "@/lib/constants";
-import { useAnswerUser } from "@/lib/prompt";
-import { useTransitionRouter } from "next-view-transitions";
-import { useChatStore } from "@/lib/store/chat-store";
+import { COMMANDS, THINKING_PHRASES } from "@/lib/constants";
+import { ChatStatus } from "ai";
+import { Button } from "@/components/ui/button";
+import { Send, Squircle } from "lucide-react";
 
 const AskBox = ({
   commandBoxPosition = "top",
-  navigateToChat = false,
+  onSendMessage,
+  status,
 }: {
   commandBoxPosition?: "top" | "bottom";
-  navigateToChat?: boolean;
+  onSendMessage: ({ text }: { text: string }) => void;
+  status: ChatStatus;
 }) => {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
-  const { resetThread } = useChatStore();
-  const answerUser = useAnswerUser();
-  const router = useTransitionRouter();
 
   useEffect(() => {
     if (inputValue.startsWith("/") && !hasSelectedCommand) {
@@ -44,38 +43,49 @@ const AskBox = ({
     e.preventDefault();
     inputRef.current?.blur();
     if (inputValue === "") return;
-    if (navigateToChat) {
-      resetThread();
-      answerUser(inputValue);
-      router.push("/chat");
-    } else {
-      answerUser(inputValue);
-    }
+    onSendMessage({ text: inputValue });
     setInputValue("");
     setHasSelectedCommand(false);
   };
 
+  const isLoading = status === "submitted" || status === "streaming";
+
   return (
     <form onSubmit={handleSubmit} className="relative flex flex-col">
-      <Input
-        type="text"
-        value={inputValue}
-        ref={inputRef}
-        className={cn(
-          "h-14",
-          "px-5 py-4",
-          "!text-base font-normal",
-          "border-muted border-b-2 border-b-input dark:bg-card rounded-2xl",
-          "transition-colors duration-300 focus:border-b-secondary/60"
-        )}
-        onChange={(e) => {
-          if (e.target.value === "") {
-            setHasSelectedCommand(false);
+      <div className="flex flex-row relative items-center">
+        <Input
+          type="text"
+          value={inputValue}
+          ref={inputRef}
+          disabled={isLoading}
+          className={cn(
+            "h-14",
+            "px-5 py-4",
+            "font-normal !text-base",
+            "border-muted border-b-2 border-b-input dark:bg-card rounded-2xl",
+            "transition-colors duration-300 focus:border-b-secondary/60"
+          )}
+          onChange={(e) => {
+            if (e.target.value === "") {
+              setHasSelectedCommand(false);
+            }
+            setInputValue(e.target.value);
+          }}
+          placeholder={
+            isLoading
+              ? `Hol'up, processing that... `
+              : `Ask me anything :) | Type "/" for commands`
           }
-          setInputValue(e.target.value);
-        }}
-        placeholder={`Ask me anything :) | Type "/" for commands`}
-      />
+        />
+        <Button
+          className="rounded-xl border-b-2 absolute right-2"
+          size={"icon"}
+          disabled={isLoading}
+          variant={"secondary"}
+        >
+          {isLoading ? <Squircle className="animate-spin" /> : <Send />}
+        </Button>
+      </div>
       <CommandMenu
         isOpen={isMenuOpen}
         setIsOpen={setIsMenuOpen}
