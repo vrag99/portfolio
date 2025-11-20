@@ -2,6 +2,12 @@ import { Achievement } from "@/lib/types";
 
 export const TIMELINE: Achievement[] = [
   {
+    title: "Sui Overflow Hackathon 2025",
+    description: "University Award Winner ($2500)",
+    timestamp: "2025-06",
+    link: "https://github.com/vrag99/Sui-FL",
+  },
+  {
     title: "Calimero x ICP Hackathon" ,
     description: "1st in the Calimero x ICP Hackathon main track (12,000$)",
     timestamp: "2025-02",

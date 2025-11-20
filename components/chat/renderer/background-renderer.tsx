@@ -10,8 +10,6 @@ import {
 import { motion } from "motion/react";
 import Link from "next/link";
 
-// TODO: make a custom renderer like linkedin for experience and education
-
 const BackgroundRenderer = ({ background }: { background: Background[] }) => {
   return (
     <Timeline>

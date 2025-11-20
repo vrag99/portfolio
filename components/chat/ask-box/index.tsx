@@ -6,24 +6,38 @@ import { Input } from "@/components/ui/input";
 import CommandMenu from "./command-menu";
 import { Command } from "@/lib/types";
 import { COMMANDS } from "@/lib/constants";
-import { useAnswerUser } from "@/lib/prompt";
-import { useTransitionRouter } from "next-view-transitions";
-import { useChatStore } from "@/lib/store/chat-store";
+import { ChatStatus } from "ai";
+import { Button } from "@/components/ui/button";
+import { Send, Squircle } from "lucide-react";
 
 const AskBox = ({
   commandBoxPosition = "top",
-  navigateToChat = false,
+  onSendMessage,
+  status,
 }: {
   commandBoxPosition?: "top" | "bottom";
-  navigateToChat?: boolean;
+  onSendMessage: ({ text }: { text: string }) => void;
+  status: ChatStatus;
 }) => {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
-  const { resetThread } = useChatStore();
-  const answerUser = useAnswerUser();
-  const router = useTransitionRouter();
+
+  // Handle "/" key to focus input
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "/" && document.activeElement !== inputRef.current) {
+        e.preventDefault();
+        inputRef.current?.focus();
+        setInputValue("/");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     if (inputValue.startsWith("/") && !hasSelectedCommand) {
@@ -34,48 +48,74 @@ const AskBox = ({
   }, [inputValue, hasSelectedCommand]);
 
   const handleCommandSelect = (command: Command) => {
-    console.log("command recieved", command);
+    console.log("command received", command);
     setInputValue(command.name);
     setIsMenuOpen(false);
     setHasSelectedCommand(true);
+
+    setTimeout(() => {
+      inputRef.current?.focus();
+      formRef.current?.requestSubmit();
+    }, 0);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     inputRef.current?.blur();
     if (inputValue === "") return;
-    if (navigateToChat) {
-      resetThread();
-      answerUser(inputValue);
-      router.push("/chat");
-    } else {
-      answerUser(inputValue);
-    }
+    onSendMessage({ text: inputValue });
     setInputValue("");
     setHasSelectedCommand(false);
   };
 
+  const isLoading = status === "submitted" || status === "streaming";
+
   return (
-    <form onSubmit={handleSubmit} className="relative flex flex-col">
-      <Input
-        type="text"
-        value={inputValue}
-        ref={inputRef}
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="relative flex flex-col"
+    >
+      <div
         className={cn(
+          "flex flex-row items-center",
           "h-14",
-          "px-5 py-4",
-          "!text-base font-normal",
-          "border-muted border-b-2 border-b-input dark:bg-card rounded-2xl",
-          "transition-colors duration-300 focus:border-b-secondary/60"
+          "border-muted border-b-2 border-b-input bg-card rounded-2xl",
+          "transition-colors duration-300 focus-within:border-b-secondary/60"
         )}
-        onChange={(e) => {
-          if (e.target.value === "") {
-            setHasSelectedCommand(false);
+      >
+        <Input
+          type="text"
+          value={inputValue}
+          ref={inputRef}
+          disabled={isLoading}
+          className={cn(
+            "pl-5 pr-3 py-4",
+            "font-normal !text-base",
+            "flex-1",
+            "bg-transparent border-none"
+          )}
+          onChange={(e) => {
+            if (e.target.value === "") {
+              setHasSelectedCommand(false);
+            }
+            setInputValue(e.target.value);
+          }}
+          placeholder={
+            isLoading
+              ? `Hol'up, processing that... `
+              : `Ask me anything :) | Type "/" for commands`
           }
-          setInputValue(e.target.value);
-        }}
-        placeholder={`Ask me anything :) | Type "/" for commands`}
-      />
+        />
+        <Button
+          className="rounded-xl border-b-2 mr-2"
+          size={"icon"}
+          disabled={isLoading}
+          variant={"secondary"}
+        >
+          {isLoading ? <Squircle className="animate-spin" /> : <Send />}
+        </Button>
+      </div>
       <CommandMenu
         isOpen={isMenuOpen}
         setIsOpen={setIsMenuOpen}

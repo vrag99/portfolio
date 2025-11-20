@@ -27,17 +27,19 @@ export type Background = {
 
 export type Social = {
   title: string;
-  icon: 'github' | 'linkedin' | 'email' | 'twitter'; 
+  icon: "github" | "linkedin" | "email" | "twitter";
   link: string;
 };
 
 export type SkillSet = {
   languages: string[];
   technologies: string[];
-}
+};
 
 // for chat
-type AiResponseBase<T extends "text" | "projects" | "timeline" | "socials" | "background"> = {
+type AiResponseBase<
+  T extends "text" | "projects" | "timeline" | "socials" | "background"
+> = {
   type: T;
   data: T extends "text"
     ? string
@@ -71,3 +73,12 @@ type BubbleBase<T extends "user" | "ai"> = {
 
 export type Bubble = BubbleBase<"user"> | BubbleBase<"ai">;
 export type Thread = Bubble[];
+
+
+// streaming types -->
+export type StreamingBubble = {
+  sender: "user" | "ai";
+  data: string;
+}
+
+export type StreamingThread = StreamingBubble[];

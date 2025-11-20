@@ -9,6 +9,8 @@ import {
 import { Achievement } from "@/lib/types";
 import { motion } from "motion/react";
 import Link from "next/link";
+
+
 const TimelineRenderer = ({ timeline }: { timeline: Achievement[] }) => {
   return (
     <Timeline>
