@@ -2,24 +2,16 @@
 
 import React, { useEffect, useRef } from "react";
 import { UserBubble, AiBubble } from "./chat-bubbles";
-import { useChatStore } from "@/lib/store/chat-store";
 import { AnimatePresence, motion } from "motion/react";
 import { UIMessage } from "ai";
 
 const Thread = ({ messages }: { messages: UIMessage[] }) => {
-  const { thread } = useChatStore();
-  const bottomRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
-    const isAtBottom =
-      container.scrollTop + container.clientHeight >= container.scrollHeight;
-    if (isAtBottom) {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [thread]);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div
@@ -36,11 +28,7 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
             )}
           </PushAnimationWrapper>
         ))}
-        <div
-          ref={bottomRef}
-          className="h-[1px] w-full flex-shrink-0 scroll-mt-4"
-          aria-hidden="true"
-        />
+        <div ref={messagesEndRef} />
       </AnimatePresence>
     </div>
   );

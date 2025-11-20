@@ -21,17 +21,16 @@ const AskBox = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasSelectedCommand, setHasSelectedCommand] = useState(false);
 
   // Handle "/" key to focus input
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Only trigger if "/" is pressed and input is not already focused
       if (e.key === "/" && document.activeElement !== inputRef.current) {
         e.preventDefault();
         inputRef.current?.focus();
-        // Set the "/" character in the input
         setInputValue("/");
       }
     };
@@ -49,10 +48,15 @@ const AskBox = ({
   }, [inputValue, hasSelectedCommand]);
 
   const handleCommandSelect = (command: Command) => {
-    console.log("command recieved", command);
+    console.log("command received", command);
     setInputValue(command.name);
     setIsMenuOpen(false);
     setHasSelectedCommand(true);
+
+    setTimeout(() => {
+      inputRef.current?.focus();
+      formRef.current?.requestSubmit();
+    }, 0);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,12 +71,16 @@ const AskBox = ({
   const isLoading = status === "submitted" || status === "streaming";
 
   return (
-    <form onSubmit={handleSubmit} className="relative flex flex-col">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="relative flex flex-col"
+    >
       <div
         className={cn(
           "flex flex-row items-center",
           "h-14",
-          "border-muted border-b-2 border-b-input dark:bg-card rounded-2xl",
+          "border-muted border-b-2 border-b-input bg-card rounded-2xl",
           "transition-colors duration-300 focus-within:border-b-secondary/60"
         )}
       >

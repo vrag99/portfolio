@@ -5,7 +5,7 @@ import { DefaultChatTransport } from "ai";
 import { useChatStore } from "@/lib/store/persisted-chat-store";
 
 const ChatPage = () => {
-  const { chatId, messages: storedMessages, setMessages } = useChatStore();
+  const { chatId, messages: storedMessages, setMessages: setStoredMessages } = useChatStore();
 
   const { messages, sendMessage, status, error } = useChat({
     id: chatId || undefined,
@@ -14,11 +14,9 @@ const ChatPage = () => {
       api: "/api/chat",
     }),
     onFinish: ({ messages: newMessages }) => {
-      console.log("✅ Stream finished successfully", newMessages);
-      setMessages(newMessages);
+      setStoredMessages(newMessages);
     },
     onError: (error) => {
-      console.error("❌ Stream error:", error);
       console.error("Error details:", {
         name: error.name,
         message: error.message,
