@@ -52,18 +52,24 @@ const AskBox = ({
 
   return (
     <form onSubmit={handleSubmit} className="relative flex flex-col">
-      <div className="flex flex-row relative items-center">
+      <div
+        className={cn(
+          "flex flex-row items-center",
+          "h-14",
+          "border-muted border-b-2 border-b-input dark:bg-card rounded-2xl",
+          "transition-colors duration-300 focus-within:border-b-secondary/60"
+        )}
+      >
         <Input
           type="text"
           value={inputValue}
           ref={inputRef}
           disabled={isLoading}
           className={cn(
-            "h-14",
-            "px-5 py-4",
+            "pl-5 pr-3 py-4",
             "font-normal !text-base",
-            "border-muted border-b-2 border-b-input dark:bg-card rounded-2xl",
-            "transition-colors duration-300 focus:border-b-secondary/60"
+            "flex-1",
+            "bg-transparent border-none"
           )}
           onChange={(e) => {
             if (e.target.value === "") {
@@ -78,7 +84,7 @@ const AskBox = ({
           }
         />
         <Button
-          className="rounded-xl border-b-2 absolute right-2"
+          className="rounded-xl border-b-2 mr-2"
           size={"icon"}
           disabled={isLoading}
           variant={"secondary"}
