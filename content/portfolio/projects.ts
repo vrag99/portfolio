@@ -2,6 +2,13 @@ import { type Project } from "@/lib/types";
 
 export const PROJECTS: Project[] = [
   {
+    title: "Dex",
+    description:
+      "Your complete & extendable memory management, currently in waitlist access.",
+    tags: [],
+    link: "https://dex.sdslabs.co",
+  },
+  {
     title: "ValidAI",
     description:
       "Decentralized AI platform, built on EigenLayer AVS and Othentic. AI agents for automating smart contract auditing + an AI marketplace with subscription-based royalties, incentivizing ML researchers community.",

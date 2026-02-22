@@ -16,7 +16,7 @@ const ProjectRenderer = ({ projects }: { projects: Project[] }) => {
           key={i}
           className="flex flex-col gap-2 border-l-2 border-primary px-2 py-3 bg-muted/30 rounded-r group w-full"
           target="_blank"
-          href={project.github}
+          href={project.github ?? project.link}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{

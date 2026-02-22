@@ -1,4 +1,4 @@
-import { google } from "@ai-sdk/google";
+import { createOpenAI } from "@ai-sdk/openai";
 import { Agent } from "@voltagent/core";
 import {
   getAboutTool,
@@ -12,6 +12,11 @@ import {
 import { readFileSync } from "fs";
 import { join } from "path";
 
+const openrouter = createOpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.OPENROUTER_API_KEY,
+});
+
 const systemPrompt = readFileSync(
   join(process.cwd(), "lib/agent/system_prompt.md"),
   "utf-8"
@@ -20,7 +25,7 @@ const systemPrompt = readFileSync(
 export const agent = new Agent({
   name: "Garv's Portfolio Assistant",
   instructions: systemPrompt,
-  model: google("gemini-2.5-flash"),
+  model: openrouter("google/gemini-2.5-flash"),
   tools: [
     getAboutTool,
     getProjectsTool,
