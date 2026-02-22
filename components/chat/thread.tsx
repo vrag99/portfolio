@@ -7,11 +7,18 @@ import { UIMessage } from "ai";
 
 const Thread = ({ messages }: { messages: UIMessage[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const lastUserMsgRef = useRef<HTMLDivElement>(null);
+  const prevMsgCountRef = useRef(0);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const lastMsg = messages[messages.length - 1];
+    if (messages.length > prevMsgCountRef.current && lastMsg?.role === "user") {
+      lastUserMsgRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+    prevMsgCountRef.current = messages.length;
   }, [messages]);
+
+  const lastUserIndex = messages.findLastIndex((m) => m.role === "user");
 
   return (
     <div
@@ -21,14 +28,15 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
       <AnimatePresence>
         {messages.map((message, i) => (
           <PushAnimationWrapper className="flex flex-col" key={i}>
-            {message.role === "user" ? (
-              <UserBubble message={message} />
-            ) : (
-              <AiBubble message={message} />
-            )}
+            <div ref={i === lastUserIndex ? lastUserMsgRef : undefined}>
+              {message.role === "user" ? (
+                <UserBubble message={message} />
+              ) : (
+                <AiBubble message={message} />
+              )}
+            </div>
           </PushAnimationWrapper>
         ))}
-        <div ref={messagesEndRef} />
       </AnimatePresence>
     </div>
   );

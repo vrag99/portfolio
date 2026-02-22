@@ -5,7 +5,7 @@ export const PROJECTS: Project[] = [
     title: "Dex",
     description:
       "Your complete & extendable memory management, currently in waitlist access.",
-    tags: [],
+    tags: ["Turborepo", "Hono", "Vite", "MCP", "Agents", "ReactRouter", "BYOK"],
     link: "https://dex.sdslabs.co",
   },
   {
@@ -14,13 +14,6 @@ export const PROJECTS: Project[] = [
       "Decentralized AI platform, built on EigenLayer AVS and Othentic. AI agents for automating smart contract auditing + an AI marketplace with subscription-based royalties, incentivizing ML researchers community.",
     tags: ["Vite", "Rust", "Solidity", "Llama", "EigenLayer"],
     github: "https://github.com/h4shk4t/validAI", 
-  },
-  {
-    title: "Mosaic Protocol",
-    description:
-      "Dynamic loan lending platform with staking rewards, along with governance DAO based on Arch Ecosystem. Stood 2nd in Archway Hunt-A-Thon.",
-    tags: ["Rust", "TypeScript"],
-    github: "https://github.com/0xnullifier/Mosaic-Protocol",
   },
   {
     title: "Zeus",
