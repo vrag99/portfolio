@@ -7,12 +7,7 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  serverExternalPackages: [
-    // Externalize only what's needed at runtime.
-    // LibSQL client is safe to externalize; native platform packages are optional.
-    "@libsql/client",
-  ],
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"]
 };
 
 const withMDX = createMDX({

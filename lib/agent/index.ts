@@ -1,4 +1,4 @@
-import { createOpenAI } from "@ai-sdk/openai";
+import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { Agent } from "@voltagent/core";
 import {
   getAboutTool,
@@ -12,8 +12,7 @@ import {
 import { readFileSync } from "fs";
 import { join } from "path";
 
-const openrouter = createOpenAI({
-  baseURL: "https://openrouter.ai/api/v1",
+const openrouter = createOpenRouter({
   apiKey: process.env.OPENROUTER_API_KEY,
 });
 

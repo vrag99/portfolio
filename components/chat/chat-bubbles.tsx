@@ -14,7 +14,7 @@ export const UserBubble = ({ message }: { message: UIMessage }) => {
           return (
             <p
               key={i}
-              className="px-4 py-1.5 self-end rounded-xl bg-accent text-accent-foreground font-medium text-sm w-fit"
+              className="px-4 py-1.5 float-end rounded-xl bg-accent text-accent-foreground font-medium text-sm w-fit"
             >
               {part.text}
             </p>
