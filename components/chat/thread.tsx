@@ -1,24 +1,35 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { UserBubble, AiBubble } from "./chat-bubbles";
 import { AnimatePresence, motion } from "motion/react";
 import { UIMessage } from "ai";
 
 const Thread = ({ messages }: { messages: UIMessage[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const lastUserMsgRef = useRef<HTMLDivElement>(null);
-  const prevMsgCountRef = useRef(0);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const [autoScroll, setAutoScroll] = useState(true);
 
   useEffect(() => {
-    const lastMsg = messages[messages.length - 1];
-    if (messages.length > prevMsgCountRef.current && lastMsg?.role === "user") {
-      lastUserMsgRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-    prevMsgCountRef.current = messages.length;
-  }, [messages]);
+    const container = containerRef.current;
+    if (!container) return;
+    const handleScroll = () => {
+      const isAtBottom =
+        container.scrollHeight - container.scrollTop <=
+        container.clientHeight + 50;
 
-  const lastUserIndex = messages.findLastIndex((m) => m.role === "user");
+      setAutoScroll(isAtBottom);
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (autoScroll) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   return (
     <div
@@ -28,7 +39,7 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
       <AnimatePresence>
         {messages.map((message, i) => (
           <PushAnimationWrapper className="flex flex-col" key={i}>
-            <div ref={i === lastUserIndex ? lastUserMsgRef : undefined}>
+            <div>
               {message.role === "user" ? (
                 <UserBubble message={message} />
               ) : (
@@ -38,6 +49,7 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
           </PushAnimationWrapper>
         ))}
       </AnimatePresence>
+      <div ref={bottomRef} />
     </div>
   );
 };

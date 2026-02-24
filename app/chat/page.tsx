@@ -25,8 +25,6 @@ const ChatPage = () => {
     },
   });
 
-  // Log streaming status changes
-  console.log("Chat status:", status);
 
   return (
     <main className="flex flex-col w-full h-screen">
@@ -41,7 +39,7 @@ const ChatPage = () => {
           </div>
         )}
         
-        <div className="sticky bottom-0 pb-2 px-4 md:px-0 md:pb-4">
+        <div className="sticky bottom-0 pb-2 px-4 md:px-0 md:pb-4 backdrop-blur-xl bg-gradient-to-r from-background via-background/20 to-background rounded-t-lg">
           <AskBox onSendMessage={sendMessage} status={status} />
         </div>
       </div>
