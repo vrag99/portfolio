@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import {
   type Activity,
   ContributionGraph,
@@ -10,21 +11,42 @@ import {
   ContributionGraphTotalCount,
   ContributionGraphLegend,
 } from "@/components/ui/contribution-graph";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
 
 type GitHubData = {
   contributions: Activity[];
   total: number;
 };
 
+type TooltipState = {
+  activity: Activity;
+  x: number;
+  y: number;
+} | null;
+
+const SvgTooltip = ({ tooltip }: { tooltip: NonNullable<TooltipState> }) =>
+  createPortal(
+    <div
+      className="pointer-events-none fixed z-50 transition-all duration-150 ease-out"
+      style={{
+        left: tooltip.x,
+        top: tooltip.y,
+        transform: "translate(-50%, -100%) translateY(-8px)",
+      }}
+    >
+      <div className="rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-lg">
+        <p className="font-semibold">{tooltip.activity.date}</p>
+        <p>{tooltip.activity.count} contributions</p>
+      </div>
+      <div className="flex justify-center">
+        <div className="h-0 w-0 border-x-[6px] border-t-[6px] border-x-transparent border-t-border" />
+      </div>
+    </div>,
+    document.body,
+  );
+
 const GitHubChart = () => {
   const [data, setData] = useState<GitHubData | null>(null);
+  const [tooltip, setTooltip] = useState<TooltipState>(null);
 
   useEffect(() => {
     fetch("/api/github")
@@ -34,6 +56,20 @@ const GitHubChart = () => {
       })
       .catch(() => {});
   }, []);
+
+  const handleBlockHover = useCallback(
+    (activity: Activity, e: React.MouseEvent<SVGRectElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      setTooltip({
+        activity,
+        x: rect.left + rect.width / 2,
+        y: rect.top,
+      });
+    },
+    [],
+  );
+
+  const handleBlockLeave = useCallback(() => setTooltip(null), []);
 
   if (!data) {
     return (
@@ -45,56 +81,34 @@ const GitHubChart = () => {
 
   return (
     <div className="space-y-3">
-      <TooltipProvider>
-        <ContributionGraph
-          data={data.contributions}
-          totalCount={data.total}
-          blockMargin={2}
-          blockSize={11}
-          fontSize={14}
-          labels={{
-            totalCount: "{{count}} contributions in the last year",
-          }}
-        >
-          <ContributionGraphCalendar>
-            {({ activity, dayIndex, weekIndex }) => (
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <g>
-                    <ContributionGraphBlock
-                      activity={activity}
-                      dayIndex={dayIndex}
-                      weekIndex={weekIndex}
-                      className={cn(
-                        'data-[level="0"]:fill-muted',
-                        'data-[level="1"]:fill-primary/20',
-                        'data-[level="2"]:fill-primary/40',
-                        'data-[level="3"]:fill-primary/60',
-                        'data-[level="4"]:fill-primary/80',
-                      )}
-                    />
-                  </g>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>
-                    {activity.count} contribution
-                    {activity.count !== 1 ? "s" : ""} on{" "}
-                    {new Date(activity.date).toLocaleDateString(undefined, {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            )}
-          </ContributionGraphCalendar>
-          <ContributionGraphFooter>
-            <ContributionGraphTotalCount />
-            <ContributionGraphLegend />
-          </ContributionGraphFooter>
-        </ContributionGraph>
-      </TooltipProvider>
+      <ContributionGraph
+        data={data.contributions}
+        totalCount={data.total}
+        blockMargin={2}
+        blockSize={11}
+        fontSize={14}
+        labels={{
+          totalCount: "{{count}} contributions in the last year",
+        }}
+      >
+        <ContributionGraphCalendar>
+          {({ activity, dayIndex, weekIndex }) => (
+            <ContributionGraphBlock
+              activity={activity}
+              className="cursor-pointer"
+              dayIndex={dayIndex}
+              weekIndex={weekIndex}
+              onMouseEnter={(e) => handleBlockHover(activity, e)}
+              onMouseLeave={handleBlockLeave}
+            />
+          )}
+        </ContributionGraphCalendar>
+        <ContributionGraphFooter>
+          <ContributionGraphTotalCount />
+          <ContributionGraphLegend />
+        </ContributionGraphFooter>
+      </ContributionGraph>
+      {tooltip && <SvgTooltip tooltip={tooltip} />}
     </div>
   );
 };
