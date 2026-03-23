@@ -295,7 +295,7 @@ export const ContributionGraph = ({
       }}
     >
       <div
-        className={cn("flex w-max max-w-full flex-col gap-2", className)}
+        className={cn("flex w-max max-w-full flex-col gap-2 font-medium", className)}
         style={{ fontSize, ...style }}
         {...props}
       />
@@ -377,7 +377,7 @@ export const ContributionGraphCalendar = ({
   );
 
   return (
-    <div className={cn("max-w-full overflow-hidden", className)} {...props}>
+    <div className={cn("max-w-full overflow-x-auto no-scrollbar overflow-y-hidden", className)} {...props}>
       <svg
         className="block overflow-visible"
         height={height}
@@ -450,7 +450,7 @@ export const ContributionGraphTotalCount = ({
   }
 
   return (
-    <div className={cn("text-muted-foreground", className)} {...props}>
+    <div className={cn("text-muted-foreground font-medium", className)} {...props}>
       {labels.totalCount
         ? labels.totalCount
             .replace("{{count}}", String(totalCount))

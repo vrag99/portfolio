@@ -40,7 +40,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen pb-28">
-      <div className="max-w-3xl mx-auto px-6 pt-32 space-y-8">
+      <div className="max-w-3xl mx-auto px-6 pt-16 md:pt-24 space-y-8">
         <BlurFade inView className="space-y-4">
           <Hero />
         </BlurFade>
