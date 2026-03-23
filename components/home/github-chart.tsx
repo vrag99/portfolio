@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   type Activity,
   ContributionGraph,
@@ -74,13 +75,40 @@ const GitHubChart = () => {
   if (!data) {
     return (
       <div className="space-y-3">
-        <div className="h-[140px] rounded-lg border border-dashed border-muted animate-pulse" />
+        <div className="flex gap-8">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <Skeleton key={i} className="h-3 w-6" />
+          ))}
+        </div>
+        <div className="flex gap-[3px]">
+          {Array.from({ length: 52 }).map((_, wi) => (
+            <div key={wi} className="flex flex-col gap-[3px]">
+              {Array.from({ length: 7 }).map((_, di) => (
+                <Skeleton
+                  key={di}
+                  className="rounded-sm"
+                  style={{ width: 11, height: 11 }}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-between">
+          <Skeleton className="h-3 w-48" />
+          <div className="flex items-center gap-1">
+            <Skeleton className="h-3 w-8" />
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Skeleton key={i} className="rounded-sm" style={{ width: 12, height: 12 }} />
+            ))}
+            <Skeleton className="h-3 w-8" />
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 animate-in fade-in">
       <ContributionGraph
         data={data.contributions}
         totalCount={data.total}

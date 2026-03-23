@@ -31,7 +31,7 @@ export default function RootLayout({
           className={`${satoshi.variable} ${architectsDaughter.variable} ${geistMono.variable} ${newsreader.variable} font-sans antialiased`}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Navbar />
+            {/* <Navbar /> */}
             {children}
           </ThemeProvider>
         </body>

@@ -6,7 +6,7 @@ export const EXPERIENCE: Background[] = [
     description:
       "Selected as one of the top 100 fellows worldwide for the Uniswap Hook Incubator program. Working on building innovative solutions in the DeFi space using Uniswap's Hook protocol.",
     startTime: "2024-08",
-    link: "https://atrium.academy/uniswap",
+    link: "https://explorer.zora.energy/token/0x11158a1751eA90124715F5bE2474BD05d284858b/instance/48",
   },
   {
     title: "Founding Engineer @StealthAI Startup",
@@ -21,7 +21,7 @@ export const EXPERIENCE: Background[] = [
     description:
       "SDSLabs is astudent-run tech organization at IIT Roorkee. I am a developer here and contributed to various projects and participated in quite a lot of hackathons.",
     startTime: "2023-04",
-    link: "https://sdslabs.co/",
+    link: "https://team.sdslabs.co/",
   },
   {
     title: "Member @WatchOut!",

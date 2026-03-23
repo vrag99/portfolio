@@ -51,10 +51,9 @@ export default function Home() {
           <GitHubChart />
         </BlurFade>
         <hr />
-        <BlurFade inView>
+        <BlurFade>
           <ExperienceSection />
         </BlurFade>
-        <hr />
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none">
