@@ -11,7 +11,6 @@ import {
   LinkedinLogo,
   XLogo,
   CalendarDots,
-  ArrowArcRight,
 } from "@phosphor-icons/react";
 import React from "react";
 import { ArrowRight } from "lucide-react";

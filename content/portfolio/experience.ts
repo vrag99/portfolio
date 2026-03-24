@@ -1,41 +1,63 @@
-import { Background } from "@/lib/types";
+import { Experience } from "@/lib/types";
 
-export const EXPERIENCE: Background[] = [
+export const EXPERIENCE: Experience[] = [
   {
-    title: "Cohort Fellow @UniswapHookIncubator",
-    description:
-      "Selected as one of the top 100 fellows worldwide for the Uniswap Hook Incubator program. Working on building innovative solutions in the DeFi space using Uniswap's Hook protocol.",
-    startTime: "2024-08",
-    link: "https://explorer.zora.energy/token/0x11158a1751eA90124715F5bE2474BD05d284858b/instance/48",
-  },
-  {
-    title: "Founding Engineer @StealthAI Startup",
-    description:
-      "Worked as a founding engineer at a New York based stealth AI startup, and worked on every aspect of the product from component libraries to deployment pipelines.",
+    company: "Stealth AI Startup",
+    role: "Founding Engineer",
+    type: "Full Time",
     startTime: "2024-06",
     endTime: "2024-09",
+    location: "New York, USA - Remote",
+    logo: "/experiences/stealth.jpeg",
     link: "#",
+    bullets: [
+      "Worked as a founding engineer at a New York based stealth AI startup",
+      "Built the product end-to-end from component libraries to deployment pipelines",
+    ],
+    techStack: ["TypeScript", "React", "Next.js", "Python", "Docker"],
   },
   {
-    title: "Developer @SDSLabs",
-    description:
-      "SDSLabs is astudent-run tech organization at IIT Roorkee. I am a developer here and contributed to various projects and participated in quite a lot of hackathons.",
+    company: "Uniswap Hook Incubator",
+    role: "Cohort Fellow",
+    type: "Fellowship",
+    startTime: "2025-10",
+    endTime: "2025-12",
+    logo: "/experiences/uhi.png",
+    location: "Remote",
+    link: "https://explorer.zora.energy/token/0x11158a1751eA90124715F5bE2474BD05d284858b/instance/48",
+    bullets: [
+      "Selected as one of the top 100 fellows worldwide for the Uniswap Hook Incubator program",
+      "Built innovative solutions in the DeFi space using Uniswap's Hook protocol",
+    ],
+    techStack: ["Solidity", "Uniswap V4", "Foundry", "TypeScript"],
+  },
+  {
+    company: "SDSLabs",
+    role: "Developer",
+    logo: "/experiences/sdslabs.svg",
+    type: "Full Time",
     startTime: "2023-04",
+    location: "IIT Roorkee",
     link: "https://team.sdslabs.co/",
+    bullets: [
+      "Student-run tech organization at IIT Roorkee",
+      "Contributed to various projects and participated in numerous hackathons",
+    ],
+    techStack: ["Go", "React", "TypeScript", "Docker", "PostgreSQL"],
   },
   {
-    title: "Member @WatchOut!",
-    description:
-      "WatchOut! is a student run media organization at IIT Roorkee. I covered events, wrote some articles and was a part of design team for magazine.",
+    company: "WatchOut!",
+    role: "Editor",
+    type: "Part Time",
     startTime: "2023-03",
     endTime: "2024-02",
+    logo: "/experiences/watchout.jpeg",
+    location: "IIT Roorkee",
     link: "https://watchout.iitr.ac.in/",
-  },
-  {
-    title: "Developer @CulturalCouncil",
-    description:
-      "Cultural Council is a group organizing cultural events at IIT Roorkee. I am a part of web development team here.",
-    startTime: "2023-03",
-    link: "https://www.instagram.com/cult.iitr/",
+    bullets: [
+      "Student-run media organization at IIT Roorkee",
+      "Covered events, wrote articles and was part of the design team for magazine",
+    ],
+    techStack: ["Figma", "JavaScript", "HTML/CSS"],
   },
 ];

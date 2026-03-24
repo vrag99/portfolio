@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { newsreader, geistMono, satoshi, architectsDaughter } from "./fonts";
-import Navbar from "@/components/ui/navbar";
+// import Navbar from "@/components/ui/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ViewTransitions } from "next-view-transitions";
 
