@@ -44,14 +44,8 @@ export function getCommandResponse(command: string): AiResponse {
       };
     case "/experience":
       return {
-        type: "background",
-        data: EXPERIENCE.map((e) => ({
-          title: `${e.role} @${e.company}`,
-          description: e.bullets.join(". "),
-          startTime: e.startTime,
-          endTime: e.endTime,
-          link: e.link,
-        })),
+        type: "experience",
+        data: EXPERIENCE,
       };
     default:
       return {

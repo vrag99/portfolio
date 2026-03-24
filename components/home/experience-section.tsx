@@ -12,7 +12,7 @@ import Link from "next/link";
 const formatDate = (date: string) =>
   new Date(date).toLocaleString("en-US", { month: "short", year: "numeric" });
 
-const ExperienceCard = ({
+export const ExperienceCard = ({
   item,
   isExpanded,
   onToggle,

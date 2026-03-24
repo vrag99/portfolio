@@ -59,7 +59,7 @@ export type SkillSet = {
 
 // for chat
 type AiResponseBase<
-  T extends "text" | "projects" | "timeline" | "socials" | "background"
+  T extends "text" | "projects" | "timeline" | "socials" | "background" | "experience"
 > = {
   type: T;
   data: T extends "text"
@@ -72,6 +72,8 @@ type AiResponseBase<
     ? Social[]
     : T extends "background"
     ? Background[]
+    : T extends "experience"
+    ? Experience[]
     : never;
 };
 
@@ -80,7 +82,8 @@ export type AiResponse =
   | AiResponseBase<"projects">
   | AiResponseBase<"timeline">
   | AiResponseBase<"socials">
-  | AiResponseBase<"background">;
+  | AiResponseBase<"background">
+  | AiResponseBase<"experience">;
 
 export type AiBubbleData = {
   isLoading: boolean;

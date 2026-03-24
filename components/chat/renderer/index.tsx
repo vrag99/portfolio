@@ -1,11 +1,12 @@
 import { AiResponse } from "@/lib/types";
 import type { UIMessage } from "@ai-sdk/react";
-import type { Project, Achievement, Social, Background } from "@/lib/types";
+import type { Project, Achievement, Social, Background, Experience } from "@/lib/types";
 import ProjectRenderer from "./project-renderer";
 import TimelineRenderer from "./timeline-renderer";
 import SocialsRenderer from "./socials-renderer";
 import MarkdownRenderer from "./markdown-renderer";
 import BackgroundRenderer from "./background-renderer";
+import ExperienceRenderer from "./experience-renderer";
 
 type RendererProps = 
   | { response: AiResponse }
@@ -28,6 +29,8 @@ const Renderer = (props: RendererProps) => {
         return <SocialsRenderer socials={response.data} />;
       case "background":
         return <BackgroundRenderer background={response.data} />;
+      case "experience":
+        return <ExperienceRenderer experience={response.data} />;
       default:
         return null;
     }
@@ -92,7 +95,7 @@ const Renderer = (props: RendererProps) => {
       case "input-available":
         return <div className="text-sm text-muted-foreground">Loading experience...</div>;
       case "output-available":
-        return <BackgroundRenderer background={(part.output as Record<string, unknown>).experience as Background[]} />;
+        return <ExperienceRenderer experience={(part.output as Record<string, unknown>).experience as Experience[]} />;
       case "output-error":
         return <div className="text-sm text-destructive">Error loading experience: {part.errorText}</div>;
       default:
