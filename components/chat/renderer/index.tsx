@@ -8,11 +8,12 @@ import MarkdownRenderer from "./markdown-renderer";
 import BackgroundRenderer from "./background-renderer";
 import ExperienceRenderer from "./experience-renderer";
 
-type RendererProps = 
-  | { response: AiResponse }
-  | { part: UIMessage['parts'][number] };
+type RendererProps =
+  | { response: AiResponse; isRestored?: boolean }
+  | { part: UIMessage['parts'][number]; isRestored?: boolean };
 
 const Renderer = (props: RendererProps) => {
+  const isRestored = props.isRestored ?? false;
   // Handle legacy AiResponse format
   if ('response' in props) {
     const { response } = props;
@@ -20,7 +21,7 @@ const Renderer = (props: RendererProps) => {
 
     switch (type) {
       case "text":
-        return <MarkdownRenderer markdown={response.data} />;
+        return <MarkdownRenderer markdown={response.data} animate={!isRestored} />;
       case "projects":
         return <ProjectRenderer projects={response.data} />;
       case "timeline":
@@ -43,7 +44,7 @@ const Renderer = (props: RendererProps) => {
 
   // Handle text parts
   if (part.type === "text") {
-    return <MarkdownRenderer markdown={part.text} />;
+    return <MarkdownRenderer markdown={part.text} animate={!isRestored} />;
   }
 
   // Handle tool-getProjects

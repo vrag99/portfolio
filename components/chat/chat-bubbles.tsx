@@ -26,7 +26,7 @@ export const UserBubble = ({ message }: { message: UIMessage }) => {
   );
 };
 
-export const AiBubble = ({ message }: { message: UIMessage }) => {
+export const AiBubble = ({ message, isRestored = false }: { message: UIMessage; isRestored?: boolean }) => {
   return (
     <div className="self-start p-2 flex flex-row">
       <div className={cn("w-6 h-6 mt-1")}>
@@ -34,7 +34,7 @@ export const AiBubble = ({ message }: { message: UIMessage }) => {
       </div>
       <div className="flex-1 min-w-0 space-y-1">
         {message.parts.map((part, i) => (
-          <Renderer key={i} part={part} />
+          <Renderer key={i} part={part} isRestored={isRestored} />
         ))}
       </div>
     </div>
