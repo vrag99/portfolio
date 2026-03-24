@@ -4,7 +4,6 @@ export const EXPERIENCE: Experience[] = [
   {
     company: "Stealth AI Startup",
     role: "Founding Engineer",
-    type: "Full Time",
     startTime: "2024-06",
     endTime: "2024-09",
     location: "New York, USA - Remote",
@@ -19,7 +18,6 @@ export const EXPERIENCE: Experience[] = [
   {
     company: "Uniswap Hook Incubator",
     role: "Cohort Fellow",
-    type: "Fellowship",
     startTime: "2025-10",
     endTime: "2025-12",
     logo: "/experiences/uhi.png",
@@ -35,7 +33,6 @@ export const EXPERIENCE: Experience[] = [
     company: "SDSLabs",
     role: "Developer",
     logo: "/experiences/sdslabs.svg",
-    type: "Full Time",
     startTime: "2023-04",
     location: "IIT Roorkee",
     link: "https://team.sdslabs.co/",
@@ -48,7 +45,6 @@ export const EXPERIENCE: Experience[] = [
   {
     company: "WatchOut!",
     role: "Editor",
-    type: "Part Time",
     startTime: "2023-03",
     endTime: "2024-02",
     logo: "/experiences/watchout.jpeg",

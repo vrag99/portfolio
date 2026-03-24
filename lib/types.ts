@@ -26,17 +26,9 @@ export type Background = {
   link: string;
 };
 
-export type ExperienceType =
-  | "Full Time"
-  | "Internship"
-  | "Fellowship"
-  | "Part Time"
-  | "Open Source";
-
 export type Experience = {
   company: string;
   role: string;
-  type: ExperienceType;
   startTime: string;
   endTime?: string;
   location: string;

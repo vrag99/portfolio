@@ -1,6 +1,6 @@
 import { TextLoop } from "@/components/ui/text-loop";
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 const Hero = () => {
   const { setTheme, theme } = useTheme();
@@ -12,14 +12,7 @@ const Hero = () => {
           <span className="font-bold tracking-tight text-primary"> Garv </span>
           👋
         </h1>
-        <button
-          className="hover:bg-secondary/20 dark:hover:bg-secondary/60 text-muted-foreground rounded-xl p-2 h-9 w-9 grid place-items-center trasnition-colors duration-150"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        >
-          <Sun className="size-5 dark:hidden" />
-          <Moon className="hidden size-5 dark:block" />
-          <span className="sr-only">Toggle theme</span>
-        </button>
+        <AnimatedThemeToggler />
       </div>
       <h2 className="text-xl md:text-2xl lg:text-3xl text-muted-foreground inline-flex items-baseline whitespace-pre-wrap font-medium">
         & I love to{" "}
