@@ -80,7 +80,7 @@ const AskBox = ({
         className={cn(
           "flex flex-row items-center",
           "h-14",
-          "border-muted border-b-2 border-b-input bg-card rounded-2xl",
+          "border-muted border border-b-2 border-b-input bg-card rounded-2xl",
           "transition-colors duration-300 focus-within:border-b-secondary/60"
         )}
       >

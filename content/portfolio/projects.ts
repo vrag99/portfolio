@@ -9,6 +9,13 @@ export const PROJECTS: Project[] = [
     link: "https://dex.sdslabs.co",
   },
   {
+    title: "Mailagent",
+    description:
+      "Self host your agentic inboxes, built on top of docker-mailserver. It is a containerized solution for managing your email inboxes with AI agents, providing features like smart categorization, automated responses, and advanced filtering.",
+    tags: ["python", "docker", "docker-mailserver", "agents"],
+    link: "https://github.com/vrag99/mailagent",
+  },
+  {
     title: "ValidAI",
     description:
       "Decentralized AI platform, built on EigenLayer AVS and Othentic. AI agents for automating smart contract auditing + an AI marketplace with subscription-based royalties, incentivizing ML researchers community.",

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { newsreader, geistMono, satoshi, architectsDaughter } from "./fonts";
-import Navbar from "@/components/ui/navbar";
+import { newsreader, satoshi, geistMono } from "./fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ViewTransitions } from "next-view-transitions";
 
 export const metadata: Metadata = {
   title: "Garv Makkar",
-  description: "Design. Dismantle. Discover.",
+  description: "I like to make stuff and break stuff",
 };
 
 export default function RootLayout({
@@ -28,10 +27,10 @@ export default function RootLayout({
           )}
         </head>
         <body
-          className={`${satoshi.variable} ${architectsDaughter.variable} ${geistMono.variable} ${newsreader.variable} font-sans antialiased`}
+          className={`${satoshi.variable} ${newsreader.variable} ${geistMono.variable} font-sans antialiased`}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Navbar />
+
             {children}
           </ThemeProvider>
         </body>

@@ -44,7 +44,7 @@ export function getCommandResponse(command: string): AiResponse {
       };
     case "/experience":
       return {
-        type: "background",
+        type: "experience",
         data: EXPERIENCE,
       };
     default:

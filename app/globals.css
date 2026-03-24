@@ -21,8 +21,8 @@ body {
   --popover-foreground: 23.33 69.23% 5.1%;
   --primary: 25.16 25.83% 47.06%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 30 35.16% 64.31%;
-  --secondary-foreground: 0 0% 100%;
+  --secondary: 30 35.16% 86.31%;
+  --secondary-foreground: 25.16 25.83% 40.06%;
   --muted: 26.25 28.57% 89.02%;
   --muted-foreground: 30 5.05% 38.82%;
   --accent: 192 9.8% 90%;
@@ -51,16 +51,16 @@ body {
   --radius: 0.5rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 10.2% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 10.2% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 1px 2px -1px hsl(0 0% 10.2% / 0.1);
-  --shadow: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 1px 2px -1px hsl(0 0% 10.2% / 0.1);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 2px 4px -1px hsl(0 0% 10.2% / 0.1);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 4px 6px -1px hsl(0 0% 10.2% / 0.1);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 8px 10px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow-sm:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 1px 2px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 1px 2px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow-md:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 2px 4px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow-lg:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 4px 6px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow-xl:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 8px 10px -1px hsl(0 0% 10.2% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 10.2% / 0.25);
   --tracking-normal: 0.05em;
 }
@@ -104,16 +104,16 @@ body {
   --radius: 0.625rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 10.2% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 10.2% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 1px 2px -1px hsl(0 0% 10.2% / 0.1);
-  --shadow: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 1px 2px -1px hsl(0 0% 10.2% / 0.1);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 2px 4px -1px hsl(0 0% 10.2% / 0.1);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 4px 6px -1px hsl(0 0% 10.2% / 0.1);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 10.2% / 0.1),
-    0 8px 10px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow-sm:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 1px 2px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 1px 2px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow-md:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 2px 4px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow-lg:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 4px 6px -1px hsl(0 0% 10.2% / 0.1);
+  --shadow-xl:
+    0 1px 3px 0px hsl(0 0% 10.2% / 0.1), 0 8px 10px -1px hsl(0 0% 10.2% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 10.2% / 0.25);
 }
 
@@ -138,4 +138,19 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }

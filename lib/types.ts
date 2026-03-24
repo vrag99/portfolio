@@ -26,6 +26,18 @@ export type Background = {
   link: string;
 };
 
+export type Experience = {
+  company: string;
+  role: string;
+  startTime: string;
+  endTime?: string;
+  location: string;
+  link: string;
+  logo?: string;
+  bullets: string[];
+  techStack: string[];
+};
+
 export type Social = {
   title: string;
   icon: "github" | "linkedin" | "email" | "twitter";
@@ -39,7 +51,7 @@ export type SkillSet = {
 
 // for chat
 type AiResponseBase<
-  T extends "text" | "projects" | "timeline" | "socials" | "background"
+  T extends "text" | "projects" | "timeline" | "socials" | "background" | "experience"
 > = {
   type: T;
   data: T extends "text"
@@ -52,6 +64,8 @@ type AiResponseBase<
     ? Social[]
     : T extends "background"
     ? Background[]
+    : T extends "experience"
+    ? Experience[]
     : never;
 };
 
@@ -60,7 +74,8 @@ export type AiResponse =
   | AiResponseBase<"projects">
   | AiResponseBase<"timeline">
   | AiResponseBase<"socials">
-  | AiResponseBase<"background">;
+  | AiResponseBase<"background">
+  | AiResponseBase<"experience">;
 
 export type AiBubbleData = {
   isLoading: boolean;

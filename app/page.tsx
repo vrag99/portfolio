@@ -1,7 +1,12 @@
 "use client";
 
 import { AskBox } from "@/components/chat";
-import { Hero } from "@/components/home";
+import {
+  Hero,
+  Description,
+  ExperienceSection,
+  GitHubChart,
+} from "@/components/home";
 import BlurFade from "@/components/ui/blur-fade";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
@@ -34,19 +39,38 @@ export default function Home() {
   });
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
-      <div className="space-y-8 font-medium">
-        <BlurFade delay={0.4} className="space-y-4">
+    <main className="min-h-screen pb-28">
+      <div className="max-w-3xl mx-auto px-6 pt-16 md:pt-24 space-y-8">
+        <BlurFade inView className="space-y-4">
           <Hero />
         </BlurFade>
-        <BlurFade delay={0.8} direction="up">
-          <AskBox
-            commandBoxPosition="bottom"
-            onSendMessage={sendMessage}
-            status={status}
-          />
+        <BlurFade inView direction="down">
+          <Description />
+        </BlurFade>
+        <BlurFade inView direction="right">
+          <GitHubChart />
+        </BlurFade>
+        <BlurFade>
+          <hr />
+        </BlurFade>
+        <BlurFade>
+          <ExperienceSection />
         </BlurFade>
       </div>
-    </div>
+
+      <div className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none">
+        <div className="bg-gradient-to-t from-background via-background/80 to-transparent pt-8 pb-4 px-4">
+          <div className="max-w-2xl mx-auto pointer-events-auto">
+            <BlurFade inView direction="up">
+              <AskBox
+                commandBoxPosition="top"
+                onSendMessage={sendMessage}
+                status={status}
+              />
+            </BlurFade>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
