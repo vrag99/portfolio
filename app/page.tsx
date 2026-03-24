@@ -59,7 +59,7 @@ export default function Home() {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none">
-        <div className="bg-gradient-to-t from-background via-background/80 to-transparent pt-8 pb-4 px-4">
+        <div className="bg-gradient-to-t from-background via-background/80 to-transparent pt-8 pb-[max(1rem,env(safe-area-inset-bottom))] px-4">
           <div className="max-w-2xl mx-auto pointer-events-auto">
             <BlurFade inView direction="up">
               <AskBox
