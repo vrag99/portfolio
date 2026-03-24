@@ -44,13 +44,15 @@ export default function Home() {
         <BlurFade inView className="space-y-4">
           <Hero />
         </BlurFade>
-        <BlurFade inView direction="up">
+        <BlurFade inView direction="down">
           <Description />
         </BlurFade>
-        <BlurFade inView direction="up">
+        <BlurFade inView direction="right">
           <GitHubChart />
         </BlurFade>
-        <hr />
+        <BlurFade>
+          <hr />
+        </BlurFade>
         <BlurFade>
           <ExperienceSection />
         </BlurFade>
@@ -59,11 +61,13 @@ export default function Home() {
       <div className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none">
         <div className="bg-gradient-to-t from-background via-background/80 to-transparent pt-8 pb-4 px-4">
           <div className="max-w-2xl mx-auto pointer-events-auto">
-            <AskBox
-              commandBoxPosition="top"
-              onSendMessage={sendMessage}
-              status={status}
-            />
+            <BlurFade inView direction="up">
+              <AskBox
+                commandBoxPosition="top"
+                onSendMessage={sendMessage}
+                status={status}
+              />
+            </BlurFade>
           </div>
         </div>
       </div>
