@@ -142,7 +142,7 @@ const Renderer = (props: RendererProps) => {
       case "input-available":
         return <div className="text-sm text-muted-foreground">Loading about info...</div>;
       case "output-available":
-        return <MarkdownRenderer markdown={part.output as string} />;
+        return null;
       case "output-error":
         return <div className="text-sm text-destructive">Error loading about: {part.errorText}</div>;
       default:

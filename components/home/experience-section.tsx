@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
+import { Markdown } from "../ui/markdown";
 
 const formatDate = (date: string) =>
   new Date(date).toLocaleString("en-US", { month: "short", year: "numeric" });
@@ -46,9 +47,13 @@ export const ExperienceCard = ({
                 {item.company}
               </Link>
             </div>
-            <p className="text-muted-foreground font-medium sm:text-base">{item.role}</p>
+            <p className="text-muted-foreground font-medium sm:text-base">
+              {item.role}
+            </p>
             <p className="text-sm font-medium text-muted-foreground sm:hidden mt-0.5">
-              {formatDate(item.startTime)} - {item.endTime ? formatDate(item.endTime) : "Present"} · {item.location}
+              {formatDate(item.startTime)} -{" "}
+              {item.endTime ? formatDate(item.endTime) : "Present"} ·{" "}
+              {item.location}
             </p>
           </div>
 
@@ -88,21 +93,21 @@ export const ExperienceCard = ({
           transition={{ duration: 0.25, ease: "easeInOut" }}
           className="overflow-hidden"
         >
-          <div className="pb-4 sm:pl-16 space-y-4">
+          <div className="pb-4 sm:pl-16 space-y-6">
             <ul className="list-disc list-outside pl-4 space-y-1.5">
               {item.bullets.map((bullet, i) => (
                 <li
                   key={i}
                   className="text-muted-foreground leading-relaxed font-medium"
                 >
-                  {bullet}
+                  <Markdown>{bullet}</Markdown>
                 </li>
               ))}
             </ul>
             {item.techStack.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
                 {item.techStack.map((tech) => (
-                  <Badge key={tech} variant={'accent'} >
+                  <Badge key={tech} variant={"accent"}>
                     {tech}
                   </Badge>
                 ))}

@@ -25,14 +25,35 @@ function extractLanguage(className?: string): string {
 }
 
 const INITIAL_COMPONENTS: Partial<Components> = {
+  a: function AComponent({ className, children, ...props }) {
+    return (
+      <a
+        {...props}
+        className={cn(
+          "text-primary underline underline-offset-4",
+          "dark:decoration-primary/40",
+          "group",
+          className,
+        )}
+        target="_blank"
+      >
+        {children}{" "}
+        <span className="relative inline-block size-[1rem] align-top overflow-hidden">
+          <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full group-hover:translate-x-full">
+            &#8599;
+          </span>
+          <span className="absolute left-0 top-0 inline-block translate-y-full -translate-x-full transition-transform duration-300 group-hover:translate-y-0 group-hover:translate-x-0">
+            &#8599;
+          </span>
+        </span>
+      </a>
+    );
+  },
   p: function PComponent({ className, children, ...props }) {
     return (
       <p
         {...props}
-        className={cn(
-          "mb-3 text-muted-foreground font-medium",
-          className
-        )}
+        className={cn("mb-3 text-muted-foreground font-medium text-base", className)}
       >
         {children}
       </p>
@@ -40,7 +61,13 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   },
   em: function EmComponent({ className, children, ...props }) {
     return (
-      <em {...props} className={cn("font-serif italic text-primary underline underline-offset-2 decoration-wavy decoration-secondary/70 dark:decoration-secondary-foreground/50 tracking-wide", className)}>
+      <em
+        {...props}
+        className={cn(
+          "font-serif text-lg font-medium",
+          className,
+        )}
+      >
         {children}
       </em>
     );
@@ -55,7 +82,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
         <span
           className={cn(
             "bg-accent text-accent-foreground border-b border-accent-foreground/20 rounded-sm px-1 font-mono text-sm",
-            className
+            className,
           )}
           {...props}
         >
@@ -93,7 +120,7 @@ const MemoizedMarkdownBlock = memo(
   },
   function propsAreEqual(prevProps, nextProps) {
     return prevProps.content === nextProps.content;
-  }
+  },
 );
 
 MemoizedMarkdownBlock.displayName = "MemoizedMarkdownBlock";

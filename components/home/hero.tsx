@@ -1,9 +1,7 @@
 import { TextLoop } from "@/components/ui/text-loop";
-import { useTheme } from "next-themes";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 const Hero = () => {
-  const { setTheme, theme } = useTheme();
   return (
     <>
       <div className="flex justify-between">

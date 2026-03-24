@@ -1,6 +1,4 @@
 "use client";
-
-import { ABOUT } from "@/content/portfolio/about";
 import { SOCIALS } from "@/content/portfolio/socials";
 import { Social } from "@/lib/types";
 import { Button } from "@/components/ui/button";
@@ -14,6 +12,7 @@ import {
 } from "@phosphor-icons/react";
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { Markdown } from "@/components/ui/markdown";
 
 const ICON_MAP: { [key: string]: Icon } = {
   github: GithubLogo,
@@ -22,22 +21,19 @@ const ICON_MAP: { [key: string]: Icon } = {
   email: Envelope,
 };
 
-function renderAbout(text: string) {
-  const parts = text.trim().split(/(\*[^*]+\*)/g);
-  return parts.map((part, i) => {
-    if (part.startsWith("*") && part.endsWith("*")) {
-      return <em key={i}>{part.slice(1, -1)}</em>;
-    }
-    return part;
-  });
-}
-
 const Description = () => {
   return (
     <div className="space-y-6">
-      <p className="text-muted-foreground leading-relaxed font-medium prose dark:prose-invert">
-        {renderAbout(ABOUT)}
-      </p>
+      <Markdown className="prose dark:prose-invert">
+        {`Hey, I'm Garv, a full stack engineer, and have built things across the stack - from design systems and component libraries to container runtimes and deployment pipelines. I care a lot about how things feel, not just how they work. 
+        \\
+        Previously founding engineer at a stealth AI startup (NYC), developer at SDSLabs, and **$24,000+** in hackathon wins. Type \`/achievements\` in the chat down there to know more.
+        \\
+        Currently building [Dex](https://dex.sdslabs.co) - an AI-powered knowledge base for teams that stays organized without the manual overhead. It's in beta with 100+ users, public launch coming soon. I am also working on [Mailagent](https://github.com/vrag99/mailagent), to self host your agentic inboxes, built on top of docker-mailserver.
+        \\
+        Send me an email and __my ai agent will get back to you__ :)
+        `}
+      </Markdown>
       <div className="flex flex-row gap-3">
         <Button asChild>
           <a
@@ -50,7 +46,7 @@ const Description = () => {
           </a>
         </Button>
         <Button variant="outline" asChild>
-          <a href="mailto:garv.codes@gmail.com">
+          <a href="mailto:hi@garv.me">
             <Envelope weight="bold" />
             Send an email
           </a>

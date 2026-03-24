@@ -31,7 +31,7 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
     if (autoScroll) {
       bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages]);
+  }, [autoScroll, messages]);
 
   return (
     <div
