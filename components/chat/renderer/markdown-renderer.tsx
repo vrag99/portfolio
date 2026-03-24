@@ -18,6 +18,16 @@ function StreamingMarkdown({ markdown }: { markdown: string }) {
   );
 }
 
-export default function MarkdownRenderer({ markdown }: { markdown: string }) {
-  return <StreamingMarkdown markdown={markdown} />;
+export default function MarkdownRenderer({
+  markdown,
+  isRestored,
+}: {
+  markdown: string;
+  isRestored?: boolean;
+}) {
+  if (isRestored) {
+    return <Markdown className="prose dark:prose-invert">{markdown}</Markdown>;
+  } else {
+    return <StreamingMarkdown markdown={markdown} />;
+  }
 }

@@ -20,6 +20,8 @@ type RendererProps =
 
 const Renderer = (props: RendererProps) => {
   // Handle legacy AiResponse format
+  const isRestored = props.isRestored || false;
+
   if ("response" in props) {
     const { response } = props;
     const type = response.type;
@@ -49,7 +51,7 @@ const Renderer = (props: RendererProps) => {
 
   // Handle text parts
   if (part.type === "text") {
-    return <MarkdownRenderer markdown={part.text} />;
+    return <MarkdownRenderer isRestored={isRestored} markdown={part.text} />;
   }
 
   // Handle tool-getProjects

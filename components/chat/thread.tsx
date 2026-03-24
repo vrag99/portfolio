@@ -10,6 +10,8 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const [autoScroll, setAutoScroll] = useState(true);
 
+  const messageRef = useRef(messages.length);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -43,7 +45,10 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
               {message.role === "user" ? (
                 <UserBubble message={message} />
               ) : (
-                <AiBubble message={message} />
+                <AiBubble
+                  isRestored={i < messageRef.current}
+                  message={message}
+                />
               )}
             </div>
           </PushAnimationWrapper>
