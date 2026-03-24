@@ -31,7 +31,7 @@ const Description = () => {
         \\
         Currently building [Dex](https://dex.sdslabs.co) - an AI-powered knowledge base for teams that stays organized without the manual overhead. It's in beta with 100+ users, public launch coming soon. I am also working on [Mailagent](https://github.com/vrag99/mailagent), to self host your agentic inboxes, built on top of docker-mailserver.
         \\
-        Send me an email and __my ai agent will get back to you__ :)
+        Send me an email and __my AI agent will get back to you__ :)
         `}
       </Markdown>
       <div className="flex flex-row gap-3">

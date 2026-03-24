@@ -20,16 +20,14 @@ function StreamingMarkdown({ markdown }: { markdown: string }) {
 
 export default function MarkdownRenderer({
   markdown,
-  animate = true,
+  isRestored,
 }: {
   markdown: string;
-  animate?: boolean;
+  isRestored?: boolean;
 }) {
-  if (!animate) {
-    return (
-      <Markdown className="prose dark:prose-invert">{markdown}</Markdown>
-    );
+  if (isRestored) {
+    return <Markdown className="prose dark:prose-invert">{markdown}</Markdown>;
+  } else {
+    return <StreamingMarkdown markdown={markdown} />;
   }
-
-  return <StreamingMarkdown markdown={markdown} />;
 }

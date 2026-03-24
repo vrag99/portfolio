@@ -9,8 +9,8 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const [autoScroll, setAutoScroll] = useState(true);
-  // Track message count at mount to know which are restored vs new
-  const initialCountRef = useRef(messages.length);
+
+  const messageRef = useRef(messages.length);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -40,12 +40,15 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
     >
       <AnimatePresence>
         {messages.map((message, i) => (
-          <PushAnimationWrapper className="flex flex-col" key={i} skipAnimation={i < initialCountRef.current}>
+          <PushAnimationWrapper className="flex flex-col" key={i}>
             <div>
               {message.role === "user" ? (
                 <UserBubble message={message} />
               ) : (
-                <AiBubble message={message} isRestored={i < initialCountRef.current} />
+                <AiBubble
+                  isRestored={i < messageRef.current}
+                  message={message}
+                />
               )}
             </div>
           </PushAnimationWrapper>
@@ -59,7 +62,6 @@ const Thread = ({ messages }: { messages: UIMessage[] }) => {
 function PushAnimationWrapper({
   children,
   className,
-  skipAnimation = false,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -68,7 +70,7 @@ function PushAnimationWrapper({
   return (
     <motion.div
       className={className}
-      initial={skipAnimation ? false : { opacity: 0 }}
+      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{
         opacity: { duration: 0.3 },

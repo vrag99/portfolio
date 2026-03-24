@@ -1,6 +1,12 @@
 import { AiResponse } from "@/lib/types";
 import type { UIMessage } from "@ai-sdk/react";
-import type { Project, Achievement, Social, Background, Experience } from "@/lib/types";
+import type {
+  Project,
+  Achievement,
+  Social,
+  Background,
+  Experience,
+} from "@/lib/types";
 import ProjectRenderer from "./project-renderer";
 import TimelineRenderer from "./timeline-renderer";
 import SocialsRenderer from "./socials-renderer";
@@ -10,18 +16,19 @@ import ExperienceRenderer from "./experience-renderer";
 
 type RendererProps =
   | { response: AiResponse; isRestored?: boolean }
-  | { part: UIMessage['parts'][number]; isRestored?: boolean };
+  | { part: UIMessage["parts"][number]; isRestored?: boolean };
 
 const Renderer = (props: RendererProps) => {
-  const isRestored = props.isRestored ?? false;
   // Handle legacy AiResponse format
-  if ('response' in props) {
+  const isRestored = props.isRestored || false;
+
+  if ("response" in props) {
     const { response } = props;
     const type = response.type;
 
     switch (type) {
       case "text":
-        return <MarkdownRenderer markdown={response.data} animate={!isRestored} />;
+        return <MarkdownRenderer markdown={response.data} />;
       case "projects":
         return <ProjectRenderer projects={response.data} />;
       case "timeline":
@@ -44,19 +51,33 @@ const Renderer = (props: RendererProps) => {
 
   // Handle text parts
   if (part.type === "text") {
-    return <MarkdownRenderer markdown={part.text} animate={!isRestored} />;
+    return <MarkdownRenderer isRestored={isRestored} markdown={part.text} />;
   }
 
   // Handle tool-getProjects
-  if (part.type === "tool-get_projects") {    
+  if (part.type === "tool-get_projects") {
     console.log("Rendering tool-getProjects part:", part);
     switch (part.state) {
       case "input-available":
-        return <div className="text-sm text-muted-foreground">Loading projects...</div>;
+        return (
+          <div className="text-sm text-muted-foreground">
+            Loading projects...
+          </div>
+        );
       case "output-available":
-        return <ProjectRenderer projects={(part.output as Record<string, unknown>).projects as Project[]} />;
+        return (
+          <ProjectRenderer
+            projects={
+              (part.output as Record<string, unknown>).projects as Project[]
+            }
+          />
+        );
       case "output-error":
-        return <div className="text-sm text-destructive">Error loading projects: {part.errorText}</div>;
+        return (
+          <div className="text-sm text-destructive">
+            Error loading projects: {part.errorText}
+          </div>
+        );
       default:
         return null;
     }
@@ -66,11 +87,26 @@ const Renderer = (props: RendererProps) => {
   if (part.type === "tool-get_achievements") {
     switch (part.state) {
       case "input-available":
-        return <div className="text-sm text-muted-foreground">Loading timeline...</div>;
+        return (
+          <div className="text-sm text-muted-foreground">
+            Loading timeline...
+          </div>
+        );
       case "output-available":
-        return <TimelineRenderer timeline={(part.output as Record<string, unknown>).achievements as Achievement[]} />;
+        return (
+          <TimelineRenderer
+            timeline={
+              (part.output as Record<string, unknown>)
+                .achievements as Achievement[]
+            }
+          />
+        );
       case "output-error":
-        return <div className="text-sm text-destructive">Error loading timeline: {part.errorText}</div>;
+        return (
+          <div className="text-sm text-destructive">
+            Error loading timeline: {part.errorText}
+          </div>
+        );
       default:
         return null;
     }
@@ -80,11 +116,25 @@ const Renderer = (props: RendererProps) => {
   if (part.type === "tool-get_socials") {
     switch (part.state) {
       case "input-available":
-        return <div className="text-sm text-muted-foreground">Loading socials...</div>;
+        return (
+          <div className="text-sm text-muted-foreground">
+            Loading socials...
+          </div>
+        );
       case "output-available":
-        return <SocialsRenderer socials={(part.output as Record<string, unknown>).socials as Social[]} />;
+        return (
+          <SocialsRenderer
+            socials={
+              (part.output as Record<string, unknown>).socials as Social[]
+            }
+          />
+        );
       case "output-error":
-        return <div className="text-sm text-destructive">Error loading socials: {part.errorText}</div>;
+        return (
+          <div className="text-sm text-destructive">
+            Error loading socials: {part.errorText}
+          </div>
+        );
       default:
         return null;
     }
@@ -94,11 +144,26 @@ const Renderer = (props: RendererProps) => {
   if (part.type === "tool-get_experience") {
     switch (part.state) {
       case "input-available":
-        return <div className="text-sm text-muted-foreground">Loading experience...</div>;
+        return (
+          <div className="text-sm text-muted-foreground">
+            Loading experience...
+          </div>
+        );
       case "output-available":
-        return <ExperienceRenderer experience={(part.output as Record<string, unknown>).experience as Experience[]} />;
+        return (
+          <ExperienceRenderer
+            experience={
+              (part.output as Record<string, unknown>)
+                .experience as Experience[]
+            }
+          />
+        );
       case "output-error":
-        return <div className="text-sm text-destructive">Error loading experience: {part.errorText}</div>;
+        return (
+          <div className="text-sm text-destructive">
+            Error loading experience: {part.errorText}
+          </div>
+        );
       default:
         return null;
     }
@@ -108,11 +173,25 @@ const Renderer = (props: RendererProps) => {
   if (part.type === "tool-get_education") {
     switch (part.state) {
       case "input-available":
-        return <div className="text-sm text-muted-foreground">Loading education...</div>;
+        return (
+          <div className="text-sm text-muted-foreground">
+            Loading education...
+          </div>
+        );
       case "output-available":
-        return <BackgroundRenderer background={(part.output as Record<string, unknown>).education as Background[]} />;
+        return (
+          <BackgroundRenderer
+            background={
+              (part.output as Record<string, unknown>).education as Background[]
+            }
+          />
+        );
       case "output-error":
-        return <div className="text-sm text-destructive">Error loading education: {part.errorText}</div>;
+        return (
+          <div className="text-sm text-destructive">
+            Error loading education: {part.errorText}
+          </div>
+        );
       default:
         return null;
     }
@@ -122,15 +201,23 @@ const Renderer = (props: RendererProps) => {
   if (part.type === "tool-get_skills") {
     switch (part.state) {
       case "input-available":
-        return <div className="text-sm text-muted-foreground">Loading skills...</div>;
+        return (
+          <div className="text-sm text-muted-foreground">Loading skills...</div>
+        );
       case "output-available":
         return (
           <div className="space-y-2">
-            <MarkdownRenderer markdown={`\`\`\`json\n${JSON.stringify(part.output, null, 2)}\n\`\`\``} />
+            <MarkdownRenderer
+              markdown={`\`\`\`json\n${JSON.stringify(part.output, null, 2)}\n\`\`\``}
+            />
           </div>
         );
       case "output-error":
-        return <div className="text-sm text-destructive">Error loading skills: {part.errorText}</div>;
+        return (
+          <div className="text-sm text-destructive">
+            Error loading skills: {part.errorText}
+          </div>
+        );
       default:
         return null;
     }
@@ -140,11 +227,19 @@ const Renderer = (props: RendererProps) => {
   if (part.type === "tool-get_about") {
     switch (part.state) {
       case "input-available":
-        return <div className="text-sm text-muted-foreground">Loading about info...</div>;
+        return (
+          <div className="text-sm text-muted-foreground">
+            Loading about info...
+          </div>
+        );
       case "output-available":
         return null;
       case "output-error":
-        return <div className="text-sm text-destructive">Error loading about: {part.errorText}</div>;
+        return (
+          <div className="text-sm text-destructive">
+            Error loading about: {part.errorText}
+          </div>
+        );
       default:
         return null;
     }
