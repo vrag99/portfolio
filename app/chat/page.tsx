@@ -6,6 +6,7 @@ import { useChatStore } from "@/lib/store/persisted-chat-store";
 import { ChevronLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const ChatNav = () => {
   const router = useRouter();
@@ -28,12 +29,13 @@ const ChatNav = () => {
 const ChatPage = () => {
   const {
     chatId,
+    setChatId,
     messages: storedMessages,
     setMessages: setStoredMessages,
   } = useChatStore();
 
-  const { messages, sendMessage, status, error } = useChat({
-    id: chatId || undefined,
+  const { id, messages, sendMessage, status, error } = useChat({
+    ...(chatId ? { id: chatId } : {}),
     messages: storedMessages,
     transport: new DefaultChatTransport({
       api: "/api/chat",
@@ -49,6 +51,12 @@ const ChatPage = () => {
       });
     },
   });
+
+  useEffect(() => {
+    if (!chatId && id) {
+      setChatId(id);
+    }
+  }, [chatId, id, setChatId]);
 
   return (
     <main className="flex flex-col w-full h-screen">

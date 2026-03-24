@@ -18,18 +18,6 @@ function StreamingMarkdown({ markdown }: { markdown: string }) {
   );
 }
 
-export default function MarkdownRenderer({
-  markdown,
-  animate = true,
-}: {
-  markdown: string;
-  animate?: boolean;
-}) {
-  if (!animate) {
-    return (
-      <Markdown className="prose dark:prose-invert">{markdown}</Markdown>
-    );
-  }
-
+export default function MarkdownRenderer({ markdown }: { markdown: string }) {
   return <StreamingMarkdown markdown={markdown} />;
 }
