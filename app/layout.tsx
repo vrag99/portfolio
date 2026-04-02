@@ -3,6 +3,7 @@ import "./globals.css";
 import { newsreader, satoshi, geistMono } from "./fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ViewTransitions } from "next-view-transitions";
+import { Analytics } from "@vercel/analytics/next";
 
 export const viewport: Viewport = {
   viewportFit: "cover",
@@ -34,10 +35,10 @@ export default function RootLayout({
           className={`${satoshi.variable} ${newsreader.variable} ${geistMono.variable} font-sans antialiased`}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-
             {children}
           </ThemeProvider>
         </body>
+        <Analytics />
       </html>
     </ViewTransitions>
   );

@@ -25,6 +25,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/typography": "^0.5.16",
     "@types/mdx": "^2.0.13",
+    "@vercel/analytics": "^2.0.1",
     "@voltagent/core": "^1.2.6",
     "@voltagent/server-hono": "^1.2.4",
     "ai": "^5.0.97",
