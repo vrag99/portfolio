@@ -5,14 +5,14 @@ export const EXPERIENCE: Experience[] = [
     company: "Neander",
     role: "Founding Engineer",
     startTime: "2026-07",
-    location: "Remote",
+    location: "Bangalore, India",
     logo: "/experiences/neander.png",
     link: "https://neander.ai",
     bullets: [
       "Owned payments end to end for Neander, shipping the prepaid wallet, Stripe top-ups, Free/Paid plan sales, coupons, and Metronome included-usage metering that decide how coding model spend is funded",
       "Built the production publishing path so teams can ship apps from the IDE: GitHub-authoritative Cloud Run Compose deploys, verified public URLs, custom domains, and Temporal-gated rollouts",
       "Shipped lean project starters with database and auth publishing, including failure repair so a first deploy lands as a working product instead of a throwaway scaffold",
-      "Wired multi-provider coding (Codex OAuth, OpenRouter, cross-provider subagents) and kept provider API keys in the local sidecar so credentials stay off hosted infra",
+      "Wired multi-provider coding (Codex OAuth, OpenRouter, cross-provider subagents)",
       "Owned early desktop product surface for the browser workspace: Electron webview migration, unified browser/files/diff panel, and the onboarding path that turns an imported or idea project into a live local checkout",
     ],
     techStack: [

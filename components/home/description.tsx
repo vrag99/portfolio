@@ -27,9 +27,9 @@ const Description = () => {
       <Markdown className="prose dark:prose-invert">
         {`Hey, I'm Garv, a full stack engineer, and have built things across the stack - from design systems and component libraries to container runtimes and deployment pipelines. I care a lot about how things feel, not just how they work.
         \\
-        I'm currently a founding engineer at [Neander](https://neander.ai), the multiplayer IDE for business teams. Before that: founding engineer at a stealth AI startup in NYC, developer at SDSLabs, and **$24,000+** in hackathon wins. Type \`/achievements\` in the chat down there to know more.
+        I'm currently a founding engineer at [Neander](https://neander.ai), the multiplayer IDE for business teams. Before that: founding engineer at a stealth AI startup in NYC, developer at SDSLabs, and won a lot of hacks. Type \`/achievements\` in the chat down there to know more.
         \\
-        On the side I built [Dex](https://heydex.co), an AI knowledge base for teams that stays organized without the manual overhead. It's in beta with 100+ users. Reach me at garv.codes@gmail.com.
+        On the side I built [Dex](https://heydex.co), an AI knowledge base for teams that stays organized without the manual overhead. It's in beta with 100+ users.
         `}
       </Markdown>
       <div className="flex flex-row gap-3">
