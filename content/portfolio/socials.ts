@@ -18,7 +18,7 @@ export const SOCIALS: Social[] = [
   },
   {
     title: "Email",
-    link: "mailto:hi@garv.me",
+    link: "mailto:garv.codes@gmail.com",
     icon: "email",
   },
 ];

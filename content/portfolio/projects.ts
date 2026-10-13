@@ -6,7 +6,7 @@ export const PROJECTS: Project[] = [
     description:
       "Your complete & extendable memory management, currently in waitlist access.",
     tags: ["Turborepo", "Hono", "Vite", "MCP", "Agents", "ReactRouter", "BYOK"],
-    link: "https://dex.sdslabs.co",
+    link: "https://heydex.co",
   },
   {
     title: "Mailagent",

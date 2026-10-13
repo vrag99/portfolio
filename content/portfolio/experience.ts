@@ -2,6 +2,31 @@ import { Experience } from "@/lib/types";
 
 export const EXPERIENCE: Experience[] = [
   {
+    company: "Neander",
+    role: "Founding Engineer",
+    startTime: "2026-07",
+    location: "Remote",
+    logo: "/experiences/neander.png",
+    link: "https://neander.ai",
+    bullets: [
+      "Owned payments end to end for Neander, shipping the prepaid wallet, Stripe top-ups, Free/Paid plan sales, coupons, and Metronome included-usage metering that decide how coding model spend is funded",
+      "Built the production publishing path so teams can ship apps from the IDE: GitHub-authoritative Cloud Run Compose deploys, verified public URLs, custom domains, and Temporal-gated rollouts",
+      "Shipped lean project starters with database and auth publishing, including failure repair so a first deploy lands as a working product instead of a throwaway scaffold",
+      "Wired multi-provider coding (Codex OAuth, OpenRouter, cross-provider subagents) and kept provider API keys in the local sidecar so credentials stay off hosted infra",
+      "Owned early desktop product surface for the browser workspace: Electron webview migration, unified browser/files/diff panel, and the onboarding path that turns an imported or idea project into a live local checkout",
+    ],
+    techStack: [
+      "TypeScript",
+      "Electron",
+      "React",
+      "Python",
+      "FastAPI",
+      "Stripe",
+      "Cloud Run",
+      "Temporal",
+    ],
+  },
+  {
     company: "Stealth AI Startup",
     role: "Founding Engineer",
     startTime: "2024-06",
@@ -40,7 +65,7 @@ export const EXPERIENCE: Experience[] = [
       "[Quizio](https://quizio.sdslabs.co/) - Live quizzing platform supporting 2,000+ concurrent users. Built the onboarding flow and optimized the live quiz pipeline, then stepped up as mentor leading full development with patches and performance improvements.",
       "Zeus - OCI-compatible container runtime in Go, built from scratch. Architecting and mentoring the project development.",
       "Accounts (RBAC) - Designed and built a complete RBAC system for SDSLabs' own auth platform (sign in with SDSLabs), built on Ory Kratos + Keto.",
-      "[Dex](https://dex.sdslabs.co/) - Created and leading its development. AI-powered knowledge base used across tech clubs for shared resources, creating slack bots, and idea exploration from their resources via Claude/ChatGpt MCP integration. 100+ beta users, Chrome extension and public launch incoming.",
+      "[Dex](https://heydex.co/) - Created and leading its development. AI-powered knowledge base used across tech clubs for shared resources, creating slack bots, and idea exploration from their resources via Claude/ChatGpt MCP integration. 100+ beta users, Chrome extension and public launch incoming.",
     ],
     techStack: [
       "Go",

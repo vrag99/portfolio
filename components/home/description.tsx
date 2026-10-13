@@ -25,13 +25,11 @@ const Description = () => {
   return (
     <div className="space-y-6">
       <Markdown className="prose dark:prose-invert">
-        {`Hey, I'm Garv, a full stack engineer, and have built things across the stack - from design systems and component libraries to container runtimes and deployment pipelines. I care a lot about how things feel, not just how they work. 
+        {`Hey, I'm Garv, a full stack engineer, and have built things across the stack - from design systems and component libraries to container runtimes and deployment pipelines. I care a lot about how things feel, not just how they work.
         \\
-        Previously founding engineer at a stealth AI startup (NYC), developer at SDSLabs, and **$24,000+** in hackathon wins. Type \`/achievements\` in the chat down there to know more.
+        I'm currently a founding engineer at [Neander](https://neander.ai), the multiplayer IDE for business teams. Before that: founding engineer at a stealth AI startup in NYC, developer at SDSLabs, and **$24,000+** in hackathon wins. Type \`/achievements\` in the chat down there to know more.
         \\
-        Currently building [Dex](https://dex.sdslabs.co) - an AI-powered knowledge base for teams that stays organized without the manual overhead. It's in beta with 100+ users, public launch coming soon. I am also working on [Mailagent](https://github.com/vrag99/mailagent), to self host your agentic inboxes, built on top of docker-mailserver.
-        \\
-        Send me an email and __my AI agent will get back to you__ :)
+        On the side I built [Dex](https://heydex.co), an AI knowledge base for teams that stays organized without the manual overhead. It's in beta with 100+ users. Reach me at garv.codes@gmail.com.
         `}
       </Markdown>
       <div className="flex flex-row gap-3">
@@ -46,7 +44,7 @@ const Description = () => {
           </a>
         </Button>
         <Button variant="outline" asChild>
-          <a href="mailto:hi@garv.me">
+          <a href="mailto:garv.codes@gmail.com">
             <Envelope weight="bold" />
             Send an email
           </a>
